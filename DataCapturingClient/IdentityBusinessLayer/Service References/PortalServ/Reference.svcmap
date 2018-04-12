@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f5c433c0-6646-4e8a-8f83-de398a595646" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="https://portal.unaab.edu.ng/Webservices/ProfileService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ProfileService3.xsd" MetadataType="Schema" ID="568d6e21-a8cc-40f6-895f-12fd3279f3ec" SourceId="1" SourceUrl="https://portal.unaab.edu.ng/Webservices/ProfileService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ProfileService31.xsd" MetadataType="Schema" ID="ecb5ee09-176f-48f2-bc91-eb0903dfb4ea" SourceId="1" SourceUrl="https://portal.unaab.edu.ng/Webservices/ProfileService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ProfileService32.xsd" MetadataType="Schema" ID="7cfeaf61-3eaa-4cf3-9b97-969e9a8ab402" SourceId="1" SourceUrl="https://portal.unaab.edu.ng/Webservices/ProfileService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ProfileService1.wsdl" MetadataType="Wsdl" ID="cd531618-2442-4ce4-8eec-33e4ea9e750a" SourceId="1" SourceUrl="https://portal.unaab.edu.ng/Webservices/ProfileService.svc?wsdl" />
+    <MetadataFile FileName="ProfileService1.disco" MetadataType="Disco" ID="133fa739-25c2-4c29-9413-f96018e62fa2" SourceId="1" SourceUrl="https://portal.unaab.edu.ng/Webservices/ProfileService.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

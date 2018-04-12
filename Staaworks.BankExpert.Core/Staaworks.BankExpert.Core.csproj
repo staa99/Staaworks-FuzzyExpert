@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3AF007F1-B6FD-4853-A441-5AAC72ED3078}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Staaworks.BankExpert.Core</RootNamespace>
+    <AssemblyName>Staaworks.BankExpert.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\QuestionRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fuzzy\AForge.Fuzzy.csproj">
+      <Project>{b631038f-e12c-4d0d-8b25-ff7f62fe62d1}</Project>
+      <Name>AForge.Fuzzy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Staaworks.BankExpert.Data\Staaworks.BankExpert.Data.csproj">
+      <Project>{5bf43238-954f-44dd-a3a6-5229721a50f7}</Project>
+      <Name>Staaworks.BankExpert.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Staaworks.BankExpert.FacialRecognition\Staaworks.BankExpert.FacialRecognition.csproj">
+      <Project>{141acc40-2f25-4299-9199-6235fc12e56b}</Project>
+      <Name>Staaworks.BankExpert.FacialRecognition</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Staaworks.BankExpert.Fingerprint\Staaworks.BankExpert.Fingerprint.csproj">
+      <Project>{8fb5cc29-b5a4-400d-a7dc-b9ab237b242d}</Project>
+      <Name>Staaworks.BankExpert.Fingerprint</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Staaworks.BankExpert.FuzzyExpert\Staaworks.BankExpert.FuzzyExpert.csproj">
+      <Project>{8332bd55-e462-4dc6-b7f6-07f2ec5db812}</Project>
+      <Name>Staaworks.BankExpert.FuzzyExpert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Staaworks.BankExpert.Shared\Staaworks.BankExpert.Shared.csproj">
+      <Project>{EEC5C3DA-4025-4B3C-A606-17BD34E75F69}</Project>
+      <Name>Staaworks.BankExpert.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dev\Usage workflow.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

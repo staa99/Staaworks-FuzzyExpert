@@ -1,0 +1,28 @@
+﻿<Window x:Class="DataCapturingClient.SearchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataCapturingClient"
+        mc:Ignorable="d"
+        Title="FUNAAB Identity Management System - Search" Height="346" Width="960">
+    <Grid>
+        <Label x:Name="lblIdNumber" Content="Matric / Staff Number" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="65,45,0,0"/>
+        <ComboBox x:Name="cmbId" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="195,46,0,0" IsEditable="True"  Text="Like"></ComboBox>
+        <Label x:Name="lblSurname" Content="Surname" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="65,73,0,0"/>
+        <ComboBox x:Name="cmbSurname" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="195,75,0,0" IsEditable="True"  Text="Like" />
+        <Label x:Name="lblFirstname" Content="First Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="65,104,0,0"/>
+        <ComboBox x:Name="cmbFirstname" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="195,103,0,0" IsEditable="True"  Text="Like" />
+        <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Left" Height="32" Margin="404,140,0,0" VerticalAlignment="Top" Width="179" Click="btnSearch_Click" />
+        <TextBox x:Name="txtIdNumber" HorizontalAlignment="Left" Height="23" Margin="404,45,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" KeyDown="txtIdNumber_KeyDown" />
+        <TextBox x:Name="txtSurname" HorizontalAlignment="Left" Height="23" Margin="404,73,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179"/>
+        <TextBox x:Name="txtFirstName" HorizontalAlignment="Left" Height="23" Margin="404,102,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179"/>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="10,206,0,0" VerticalAlignment="Top" Height="99" Width="932" SelectionChanged="dataGrid_SelectionChanged" IsReadOnly="True" MouseDoubleClick="dataGrid_MouseDoubleClick">
+        <DataGrid.Columns>
+            <DataGridHyperlinkColumn Binding="{x:Null}" ContentBinding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Edit"/>
+        </DataGrid.Columns>
+        </DataGrid>
+        <CheckBox x:Name="chkSearchSource" Content="Search Source" HorizontalAlignment="Left" Margin="65,160,0,0" VerticalAlignment="Top" IsChecked="True"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,118 @@
+﻿<Window x:Class="DataCapturingClient.Profile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataCapturingClient"
+        mc:Ignorable="d"
+        Title="FUNAAB Identity Management System - Profile" Height="625.4" Width="960" Closing="Window_Closing">
+
+    <Window.Resources>
+        <ResourceDictionary>
+
+            <BitmapImage x:Key="logo" UriSource="Resources/FUNAAB-Logo.png" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Height="602" Margin="0,0,-0.4,-6" VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFE7EDC6" Offset="0"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Label x:Name="lblIdNumber" Content="ID Number:" HorizontalAlignment="Left" Margin="106,43,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtIdNumber" HorizontalAlignment="Left" Height="23" Margin="206,49,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="212" IsEnabled="False"/>
+        <Image x:Name="imgboxCapture" HorizontalAlignment="Left" Height="225" Margin="628,46,0,0" VerticalAlignment="Top" Width="175" OpacityMask="Black"/>
+        <Label x:Name="lblSurname" Content="Surname:" HorizontalAlignment="Left" Margin="106,71,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtSurname" HorizontalAlignment="Left" Height="23" Margin="206,77,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="212" IsEnabled="False"/>
+        <Label x:Name="lblFirstName" Content="First Name:" HorizontalAlignment="Left" Margin="106,99,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtFirstname" HorizontalAlignment="Left" Height="23" Margin="206,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="212" IsEnabled="False"/>
+        <Label x:Name="lblOtherName" Content="Other Names:" HorizontalAlignment="Left" Margin="106,127,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtOthername" HorizontalAlignment="Left" Height="23" Margin="206,133,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="212" IsEnabled="False"/>
+        <Label x:Name="lblCollege" Content="College:" HorizontalAlignment="Left" Margin="106,156,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtCollege" HorizontalAlignment="Left" Height="23" Margin="206,162,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="212" IsEnabled="False"/>
+        <Label x:Name="lblDepartment" Content="Department:" HorizontalAlignment="Left" Margin="106,184,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtDepartment" HorizontalAlignment="Left" Height="23" Margin="206,190,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="212" IsEnabled="False"/>
+        <Label x:Name="lblHealthId" Content="Health ID:" HorizontalAlignment="Left" Margin="106,212,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtHealthId" HorizontalAlignment="Left" Height="23" Margin="206,218,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="212"/>
+        <Label x:Name="lblPhone" Content="Phone:" HorizontalAlignment="Left" Margin="105,300,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtPhone" HorizontalAlignment="Left" Height="23" Margin="206,303,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="212" IsEnabled="False"/>
+        <Label x:Name="lblBloodGrp" Content="Blood Group" HorizontalAlignment="Left" Margin="106,243,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmbBloodGrp" HorizontalAlignment="Left" Height="26" Margin="206,246,0,0" VerticalAlignment="Top" Width="114" Text="Select"/>
+        <Label x:Name="lblSex" Content="Sex" HorizontalAlignment="Left" Margin="105,269,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rbnSexMale" Content="Male" HorizontalAlignment="Left" Margin="206,278,0,0" VerticalAlignment="Top" GroupName="rbnSex" IsEnabled="False"/>
+        <RadioButton x:Name="rbnSexFemale" Content="Female" HorizontalAlignment="Left" Margin="361,278,0,0" VerticalAlignment="Top" GroupName="rbnSex" IsEnabled="False"/>
+        <Button x:Name="btnTakePhoto" Content="Take a Photo" HorizontalAlignment="Left" Margin="677,333,0,0" VerticalAlignment="Top" Width="75" Click="btnTakePhoto_Click" />
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="206,331,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="212" IsEnabled="False"/>
+        <Label x:Name="lblEmail" Content="Email" HorizontalAlignment="Left" Margin="105,331,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.523,-0.109"/>
+        <Rectangle HorizontalAlignment="Left" Height="59" Margin="0,539,-0.4,0" Stroke="Black" VerticalAlignment="Top" Width="954">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF9FBF1" Offset="0.375"/>
+                    <GradientStop Color="#FF2A5603" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Button x:Name="btnEnrollFingers" Content="Capture FingerPrints&gt;&gt;&gt;" HorizontalAlignment="Left" Margin="727,555,0,0" VerticalAlignment="Top" Width="161" Click="btnEnrollFingers_Click" Height="31" FontWeight="Bold" FontSize="13.333" BorderThickness="2,1,1,1" RenderTransformOrigin="0.5,0.5" Foreground="#FF183102">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1" ScaleX="1"/>
+                    <SkewTransform AngleY="0" AngleX="0"/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF809C6C" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btnVerifyFingers" Content="Verify FingerPrints ??" HorizontalAlignment="Left" Margin="439,555,0,0" VerticalAlignment="Top" Width="161" Click="btnVerifyFingers_Click" Height="31" FontWeight="Bold" FontSize="13.333" BorderThickness="2,1,1,1" RenderTransformOrigin="0.5,0.5" Foreground="#FF183102">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1" ScaleX="1"/>
+                    <SkewTransform AngleY="0" AngleX="0"/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF809C6C" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btnSaveChanges" Content="Save Changes" HorizontalAlignment="Left" Margin="105,555,0,0" VerticalAlignment="Top" Width="161" Height="31" FontWeight="Bold" FontSize="13.333" BorderThickness="2,1,1,1" RenderTransformOrigin="0.5,0.5" Foreground="#FF183102" Click="btnSaveChanges_Click">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1" ScaleX="1"/>
+                    <SkewTransform AngleY="0" AngleX="0"/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF809C6C" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <TextBox x:Name="txtLevel" HorizontalAlignment="Left" Height="23" Margin="206,362,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="212" IsEnabled="False"/>
+        <Label x:Name="lblLevel" Content="Level" HorizontalAlignment="Left" Margin="105,362,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.523,-0.109"/>
+        <TextBox x:Name="txtSponsorName" HorizontalAlignment="Left" Height="23" Margin="206,423,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="212" IsEnabled="False"/>
+        <Label x:Name="lblSponsorName" Content="Sponsor Name:" HorizontalAlignment="Left" Margin="105,423,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.523,-0.109"/>
+        <TextBox x:Name="txtSponsorPhone" HorizontalAlignment="Left" Height="23" Margin="206,454,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="212" IsEnabled="False"/>
+        <Label x:Name="lblSponsorPhone" Content="Sponsor Phone" HorizontalAlignment="Left" Margin="105,454,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.523,-0.109"/>
+        <TextBox x:Name="txtSponsorAddress" HorizontalAlignment="Left" Height="23" Margin="206,485,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="212" IsEnabled="False"/>
+        <Label x:Name="lblSponsorAddress" Content="Sponsor Address:" HorizontalAlignment="Left" Margin="105,485,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.523,-0.109"/>
+        <Image x:Name="imagelogo" HorizontalAlignment="Left" Height="100" Margin="6,10,0,0" VerticalAlignment="Top" Width="100" Source="{StaticResource logo}" />
+
+    </Grid>
+</Window>

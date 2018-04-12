@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://pg.unaab.edu.ng/webservice/PGService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/PGPortal.WebService" />
+  <xs:element name="getStudentRecord">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="MatricNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getStudentRecordResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/PGPortal.WebService" minOccurs="0" name="getStudentRecordResult" nillable="true" type="q1:StudentRecord" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getStudentRecordWithSession">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="MatricNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Session" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getStudentRecordWithSessionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/PGPortal.WebService" minOccurs="0" name="getStudentRecordWithSessionResult" nillable="true" type="q2:StudentRecord" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

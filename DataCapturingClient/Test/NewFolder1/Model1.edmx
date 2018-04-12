@@ -1,0 +1,1283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="IdentityDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BloodGroup">
+          <Key>
+            <PropertyRef Name="BloodGroup" />
+          </Key>
+          <Property Name="BloodGroup" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="College">
+          <Key>
+            <PropertyRef Name="CollegeCode" />
+          </Key>
+          <Property Name="CollegeCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CollegeName" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="DepartmentCode" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="DepartmentName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="CollegeCode" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fingers">
+          <Key>
+            <PropertyRef Name="FingerId" />
+          </Key>
+          <Property Name="FingerId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GenericPerson">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="50" />
+          <Property Name="CompanyAddress" Type="varchar" MaxLength="250" />
+          <Property Name="CompanyRegNo" Type="varchar" MaxLength="500" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="DateLastModified" Type="datetime" />
+        </EntityType>
+        <EntityType Name="IDCardPrintCount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdentityNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IDSnapshot">
+          <Key>
+            <PropertyRef Name="SnapshotID" />
+          </Key>
+          <Property Name="SnapshotID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="SnapshotDetails" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="DateLastModified" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'IdentityDB.dbo.IDWUNDERGRADUATE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="IDWUNDERGRADUATE">
+          <Property Name="IDWMATNO" Type="nvarchar" MaxLength="255" />
+          <Property Name="IDWNAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="IDWDEPT" Type="nvarchar" MaxLength="255" />
+          <Property Name="IDWCOLLEGE" Type="nvarchar" MaxLength="255" />
+          <Property Name="IDWSEX" Type="nvarchar" MaxLength="255" />
+          <Property Name="IDWBLOODGROUP" Type="nvarchar" MaxLength="255" />
+          <Property Name="IDWSPONSORNAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="IDWPhotoField1" Type="image" />
+          <Property Name="IDWHCN" Type="nvarchar" MaxLength="255" />
+          <Property Name="IDWSPONSORPHONE" Type="nvarchar" MaxLength="255" />
+          <Property Name="IDWSignatureField1" Type="image" />
+          <Property Name="IDWPrintCountField1" Type="int" />
+          <Property Name="IDWLEVEL" Type="nvarchar" MaxLength="255" />
+          <Property Name="IDWDateField1" Type="datetime" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="250" />
+          <Property Name="Firstname" Type="nvarchar" MaxLength="250" />
+          <Property Name="Middlename" Type="nvarchar" MaxLength="250" />
+          <Property Name="MatNo" Type="varchar" MaxLength="50" />
+          <Property Name="MatNo2" Type="float" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'IdentityDB.dbo.NameSplit2' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="NameSplit2">
+          <Property Name="IDWMATNO" Type="varchar" MaxLength="50" />
+          <Property Name="Surname" Type="varchar" MaxLength="50" />
+          <Property Name="Firstname" Type="varchar" MaxLength="50" />
+          <Property Name="Middlename" Type="varchar" MaxLength="50" />
+          <Property Name="Column 4" Type="varchar" MaxLength="50" />
+          <Property Name="Column 5" Type="varchar" MaxLength="50" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'IdentityDB.dbo.pdepts' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="pdepts">
+          <Property Name="MatriculationNo" Type="float" />
+          <Property Name="DepartmentId" Type="float" />
+          <Property Name="LevelId" Type="float" />
+          <Property Name="Id" Type="float" />
+          <Property Name="LevelName" Type="nvarchar" MaxLength="255" />
+        </EntityType>-->
+        <EntityType Name="PersonFingers">
+          <Key>
+            <PropertyRef Name="PersonFingerId" />
+          </Key>
+          <Property Name="PersonFingerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SnapshotId" Type="int" Nullable="false" />
+          <Property Name="FingerId" Type="int" Nullable="false" />
+          <Property Name="FID1" Type="nvarchar(max)" />
+          <Property Name="FID2" Type="nvarchar(max)" />
+          <Property Name="FID3" Type="nvarchar(max)" />
+          <Property Name="FID4" Type="nvarchar(max)" />
+          <Property Name="FMD" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="DateLastModified" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PersonPictures">
+          <Key>
+            <PropertyRef Name="PersonPictureID" />
+          </Key>
+          <Property Name="PersonPictureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SnapshotId" Type="int" Nullable="false" />
+          <Property Name="OriginalImage" Type="image" Nullable="false" />
+          <Property Name="ProcessedImage" Type="image" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="DateLastModified" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdentityNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Firstname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Middlename" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="HealthCentreNo" Type="varchar" MaxLength="50" />
+          <Property Name="Sex" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="BloodGroup" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="CurrentPhoto" Type="image" />
+          <Property Name="AuthorizedSignature" Type="image" />
+          <Property Name="CurrentSnapshotId" Type="int" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="DateLastModified" Type="datetime" />
+          <Property Name="IDCardPrintCount" Type="int" Nullable="false" />
+          <Property Name="DateLastPrinted" Type="datetime" />
+          <Property Name="WatermarkedPhoto" Type="image" />
+        </EntityType>
+        <EntityType Name="StaffPerson">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="CurrentDesignation" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CurrentPost" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="YearOfAppointment" Type="varchar" MaxLength="50" />
+          <Property Name="CurrentDepartmentId" Type="int" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="DateLastModified" Type="datetime" />
+        </EntityType>
+        <EntityType Name="StudentPerson">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntrySession" Type="varchar" MaxLength="50" />
+          <Property Name="CurrentDepartmentId" Type="int" Nullable="false" />
+          <Property Name="CurrentLevel" Type="varchar" MaxLength="50" />
+          <Property Name="SponsorName" Type="varchar" MaxLength="255" />
+          <Property Name="SponsorPhone" Type="varchar" MaxLength="255" />
+          <Property Name="SponsorAddress" Type="varchar" MaxLength="150" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="DateLastModified" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="1250" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="AuthenticateExternally" Type="bit" Nullable="false" />
+          <Property Name="AuthenticationProvider" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Departments_College">
+          <End Role="College" Type="Self.College" Multiplicity="1" />
+          <End Role="Departments" Type="Self.Departments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="College">
+              <PropertyRef Name="CollegeCode" />
+            </Principal>
+            <Dependent Role="Departments">
+              <PropertyRef Name="CollegeCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GenericPerson_Persons">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
+          <End Role="GenericPerson" Type="Self.GenericPerson" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GenericPerson">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GenericPerson_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="GenericPerson" Type="Self.GenericPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="GenericPerson">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GenericPerson_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="GenericPerson" Type="Self.GenericPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="GenericPerson">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IDCardPrintCount_Persons">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
+          <End Role="IDCardPrintCount" Type="Self.IDCardPrintCount" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IDCardPrintCount">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IDSnapshot_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="IDSnapshot" Type="Self.IDSnapshot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="IDSnapshot">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IDSnapshot_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="IDSnapshot" Type="Self.IDSnapshot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="IDSnapshot">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonFingers_IDSnapshot">
+          <End Role="IDSnapshot" Type="Self.IDSnapshot" Multiplicity="1" />
+          <End Role="PersonFingers" Type="Self.PersonFingers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IDSnapshot">
+              <PropertyRef Name="SnapshotID" />
+            </Principal>
+            <Dependent Role="PersonFingers">
+              <PropertyRef Name="SnapshotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonFingers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="PersonFingers" Type="Self.PersonFingers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PersonFingers">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonFingers_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="PersonFingers" Type="Self.PersonFingers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PersonFingers">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonPictures_IDSnapshot">
+          <End Role="IDSnapshot" Type="Self.IDSnapshot" Multiplicity="1" />
+          <End Role="PersonPictures" Type="Self.PersonPictures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IDSnapshot">
+              <PropertyRef Name="SnapshotID" />
+            </Principal>
+            <Dependent Role="PersonPictures">
+              <PropertyRef Name="SnapshotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonPictures_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="PersonPictures" Type="Self.PersonPictures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PersonPictures">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonPictures_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="PersonPictures" Type="Self.PersonPictures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PersonPictures">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StaffPerson_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="StaffPerson" Type="Self.StaffPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="StaffPerson">
+              <PropertyRef Name="CurrentDepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StaffPerson_Persons">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
+          <End Role="StaffPerson" Type="Self.StaffPerson" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StaffPerson">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentPerson_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="StudentPerson" Type="Self.StudentPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="StudentPerson">
+              <PropertyRef Name="CurrentDepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentPerson_Persons">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
+          <End Role="StudentPerson" Type="Self.StudentPerson" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentPerson">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentPerson_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="StudentPerson" Type="Self.StudentPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="StudentPerson">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentPerson_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="StudentPerson" Type="Self.StudentPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="StudentPerson">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IdentityDBModelStoreContainer">
+          <EntitySet Name="BloodGroup" EntityType="Self.BloodGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="College" EntityType="Self.College" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fingers" EntityType="Self.Fingers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GenericPerson" EntityType="Self.GenericPerson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IDCardPrintCount" EntityType="Self.IDCardPrintCount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IDSnapshot" EntityType="Self.IDSnapshot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonFingers" EntityType="Self.PersonFingers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonPictures" EntityType="Self.PersonPictures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persons" EntityType="Self.Persons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StaffPerson" EntityType="Self.StaffPerson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentPerson" EntityType="Self.StudentPerson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Departments_College" Association="Self.FK_Departments_College">
+            <End Role="College" EntitySet="College" />
+            <End Role="Departments" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GenericPerson_Persons" Association="Self.FK_GenericPerson_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="GenericPerson" EntitySet="GenericPerson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GenericPerson_Users" Association="Self.FK_GenericPerson_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="GenericPerson" EntitySet="GenericPerson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GenericPerson_Users1" Association="Self.FK_GenericPerson_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="GenericPerson" EntitySet="GenericPerson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDCardPrintCount_Persons" Association="Self.FK_IDCardPrintCount_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="IDCardPrintCount" EntitySet="IDCardPrintCount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDSnapshot_Users" Association="Self.FK_IDSnapshot_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="IDSnapshot" EntitySet="IDSnapshot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDSnapshot_Users1" Association="Self.FK_IDSnapshot_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="IDSnapshot" EntitySet="IDSnapshot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonFingers_IDSnapshot" Association="Self.FK_PersonFingers_IDSnapshot">
+            <End Role="IDSnapshot" EntitySet="IDSnapshot" />
+            <End Role="PersonFingers" EntitySet="PersonFingers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonFingers_Users" Association="Self.FK_PersonFingers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PersonFingers" EntitySet="PersonFingers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonFingers_Users1" Association="Self.FK_PersonFingers_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PersonFingers" EntitySet="PersonFingers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonPictures_IDSnapshot" Association="Self.FK_PersonPictures_IDSnapshot">
+            <End Role="IDSnapshot" EntitySet="IDSnapshot" />
+            <End Role="PersonPictures" EntitySet="PersonPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonPictures_Users" Association="Self.FK_PersonPictures_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PersonPictures" EntitySet="PersonPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonPictures_Users1" Association="Self.FK_PersonPictures_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PersonPictures" EntitySet="PersonPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StaffPerson_Departments" Association="Self.FK_StaffPerson_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="StaffPerson" EntitySet="StaffPerson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StaffPerson_Persons" Association="Self.FK_StaffPerson_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="StaffPerson" EntitySet="StaffPerson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentPerson_Departments" Association="Self.FK_StudentPerson_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="StudentPerson" EntitySet="StudentPerson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentPerson_Persons" Association="Self.FK_StudentPerson_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="StudentPerson" EntitySet="StudentPerson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentPerson_Users" Association="Self.FK_StudentPerson_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="StudentPerson" EntitySet="StudentPerson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentPerson_Users1" Association="Self.FK_StudentPerson_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="StudentPerson" EntitySet="StudentPerson" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IdentityDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BloodGroup">
+          <Key>
+            <PropertyRef Name="BloodGroup1" />
+          </Key>
+          <Property Name="BloodGroup1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="College">
+          <Key>
+            <PropertyRef Name="CollegeCode" />
+          </Key>
+          <Property Name="CollegeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CollegeName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK_Departments_College" FromRole="College" ToRole="Departments" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentCode" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DepartmentName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CollegeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="College" Relationship="Self.FK_Departments_College" FromRole="Departments" ToRole="College" />
+          <NavigationProperty Name="StaffPersons" Relationship="Self.FK_StaffPerson_Departments" FromRole="Departments" ToRole="StaffPerson" />
+          <NavigationProperty Name="StudentPersons" Relationship="Self.FK_StudentPerson_Departments" FromRole="Departments" ToRole="StudentPerson" />
+        </EntityType>
+        <EntityType Name="Finger">
+          <Key>
+            <PropertyRef Name="FingerId" />
+          </Key>
+          <Property Name="FingerId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GenericPerson">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyRegNo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="DateLastModified" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_GenericPerson_Persons" FromRole="GenericPerson" ToRole="Persons" />
+          <NavigationProperty Name="User" Relationship="Self.FK_GenericPerson_Users" FromRole="GenericPerson" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_GenericPerson_Users1" FromRole="GenericPerson" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="IDCardPrintCount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdentityNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_IDCardPrintCount_Persons" FromRole="IDCardPrintCount" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="IDSnapshot">
+          <Key>
+            <PropertyRef Name="SnapshotID" />
+          </Key>
+          <Property Name="SnapshotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="SnapshotDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="DateLastModified" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="Self.FK_IDSnapshot_Users" FromRole="IDSnapshot" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_IDSnapshot_Users1" FromRole="IDSnapshot" ToRole="Users" />
+          <NavigationProperty Name="PersonFingers" Relationship="Self.FK_PersonFingers_IDSnapshot" FromRole="IDSnapshot" ToRole="PersonFingers" />
+          <NavigationProperty Name="PersonPictures" Relationship="Self.FK_PersonPictures_IDSnapshot" FromRole="IDSnapshot" ToRole="PersonPictures" />
+        </EntityType>
+        <EntityType Name="PersonFinger">
+          <Key>
+            <PropertyRef Name="PersonFingerId" />
+          </Key>
+          <Property Name="PersonFingerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SnapshotId" Type="Int32" Nullable="false" />
+          <Property Name="FingerId" Type="Int32" Nullable="false" />
+          <Property Name="FID1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FID2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FID3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FID4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FMD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="DateLastModified" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="IDSnapshot" Relationship="Self.FK_PersonFingers_IDSnapshot" FromRole="PersonFingers" ToRole="IDSnapshot" />
+          <NavigationProperty Name="User" Relationship="Self.FK_PersonFingers_Users" FromRole="PersonFingers" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_PersonFingers_Users1" FromRole="PersonFingers" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="PersonPicture">
+          <Key>
+            <PropertyRef Name="PersonPictureID" />
+          </Key>
+          <Property Name="PersonPictureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SnapshotId" Type="Int32" Nullable="false" />
+          <Property Name="OriginalImage" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProcessedImage" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="DateLastModified" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="IDSnapshot" Relationship="Self.FK_PersonPictures_IDSnapshot" FromRole="PersonPictures" ToRole="IDSnapshot" />
+          <NavigationProperty Name="User" Relationship="Self.FK_PersonPictures_Users" FromRole="PersonPictures" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_PersonPictures_Users1" FromRole="PersonPictures" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdentityNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Middlename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HealthCentreNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="BloodGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CurrentPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="AuthorizedSignature" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CurrentSnapshotId" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="DateLastModified" Type="DateTime" Precision="3" />
+          <Property Name="IDCardPrintCount" Type="Int32" Nullable="false" />
+          <Property Name="DateLastPrinted" Type="DateTime" Precision="3" />
+          <Property Name="WatermarkedPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="GenericPerson" Relationship="Self.FK_GenericPerson_Persons" FromRole="Persons" ToRole="GenericPerson" />
+          <NavigationProperty Name="IDCardPrintCount1" Relationship="Self.FK_IDCardPrintCount_Persons" FromRole="Persons" ToRole="IDCardPrintCount" />
+          <NavigationProperty Name="StaffPerson" Relationship="Self.FK_StaffPerson_Persons" FromRole="Persons" ToRole="StaffPerson" />
+          <NavigationProperty Name="StudentPerson" Relationship="Self.FK_StudentPerson_Persons" FromRole="Persons" ToRole="StudentPerson" />
+        </EntityType>
+        <EntityType Name="StaffPerson">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="CurrentDesignation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CurrentPost" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="YearOfAppointment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CurrentDepartmentId" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="DateLastModified" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_StaffPerson_Departments" FromRole="StaffPerson" ToRole="Departments" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_StaffPerson_Persons" FromRole="StaffPerson" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="StudentPerson">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntrySession" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CurrentDepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="CurrentLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SponsorName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SponsorPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SponsorAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="DateLastModified" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_StudentPerson_Departments" FromRole="StudentPerson" ToRole="Departments" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_StudentPerson_Persons" FromRole="StudentPerson" ToRole="Persons" />
+          <NavigationProperty Name="User" Relationship="Self.FK_StudentPerson_Users" FromRole="StudentPerson" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_StudentPerson_Users1" FromRole="StudentPerson" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="1250" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="AuthenticateExternally" Type="Boolean" Nullable="false" />
+          <Property Name="AuthenticationProvider" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GenericPersons" Relationship="Self.FK_GenericPerson_Users" FromRole="Users" ToRole="GenericPerson" />
+          <NavigationProperty Name="GenericPersons1" Relationship="Self.FK_GenericPerson_Users1" FromRole="Users" ToRole="GenericPerson" />
+          <NavigationProperty Name="IDSnapshots" Relationship="Self.FK_IDSnapshot_Users" FromRole="Users" ToRole="IDSnapshot" />
+          <NavigationProperty Name="IDSnapshots1" Relationship="Self.FK_IDSnapshot_Users1" FromRole="Users" ToRole="IDSnapshot" />
+          <NavigationProperty Name="PersonFingers" Relationship="Self.FK_PersonFingers_Users" FromRole="Users" ToRole="PersonFingers" />
+          <NavigationProperty Name="PersonFingers1" Relationship="Self.FK_PersonFingers_Users1" FromRole="Users" ToRole="PersonFingers" />
+          <NavigationProperty Name="PersonPictures" Relationship="Self.FK_PersonPictures_Users" FromRole="Users" ToRole="PersonPictures" />
+          <NavigationProperty Name="PersonPictures1" Relationship="Self.FK_PersonPictures_Users1" FromRole="Users" ToRole="PersonPictures" />
+          <NavigationProperty Name="StudentPersons" Relationship="Self.FK_StudentPerson_Users" FromRole="Users" ToRole="StudentPerson" />
+          <NavigationProperty Name="StudentPersons1" Relationship="Self.FK_StudentPerson_Users1" FromRole="Users" ToRole="StudentPerson" />
+        </EntityType>
+        <Association Name="FK_Departments_College">
+          <End Role="College" Type="Self.College" Multiplicity="1" />
+          <End Role="Departments" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="College">
+              <PropertyRef Name="CollegeCode" />
+            </Principal>
+            <Dependent Role="Departments">
+              <PropertyRef Name="CollegeCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StaffPerson_Departments">
+          <End Role="Departments" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="StaffPerson" Type="Self.StaffPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="StaffPerson">
+              <PropertyRef Name="CurrentDepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentPerson_Departments">
+          <End Role="Departments" Type="Self.Department" Multiplicity="1" />
+          <End Role="StudentPerson" Type="Self.StudentPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="StudentPerson">
+              <PropertyRef Name="CurrentDepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GenericPerson_Persons">
+          <End Role="Persons" Type="Self.Person" Multiplicity="1" />
+          <End Role="GenericPerson" Type="Self.GenericPerson" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GenericPerson">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GenericPerson_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="GenericPerson" Type="Self.GenericPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="GenericPerson">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GenericPerson_Users1">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="GenericPerson" Type="Self.GenericPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="GenericPerson">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IDCardPrintCount_Persons">
+          <End Role="Persons" Type="Self.Person" Multiplicity="1" />
+          <End Role="IDCardPrintCount" Type="Self.IDCardPrintCount" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IDCardPrintCount">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IDSnapshot_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="IDSnapshot" Type="Self.IDSnapshot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="IDSnapshot">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IDSnapshot_Users1">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="IDSnapshot" Type="Self.IDSnapshot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="IDSnapshot">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonFingers_IDSnapshot">
+          <End Role="IDSnapshot" Type="Self.IDSnapshot" Multiplicity="1" />
+          <End Role="PersonFingers" Type="Self.PersonFinger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IDSnapshot">
+              <PropertyRef Name="SnapshotID" />
+            </Principal>
+            <Dependent Role="PersonFingers">
+              <PropertyRef Name="SnapshotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonPictures_IDSnapshot">
+          <End Role="IDSnapshot" Type="Self.IDSnapshot" Multiplicity="1" />
+          <End Role="PersonPictures" Type="Self.PersonPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IDSnapshot">
+              <PropertyRef Name="SnapshotID" />
+            </Principal>
+            <Dependent Role="PersonPictures">
+              <PropertyRef Name="SnapshotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonFingers_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="PersonFingers" Type="Self.PersonFinger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PersonFingers">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonFingers_Users1">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="PersonFingers" Type="Self.PersonFinger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PersonFingers">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonPictures_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="PersonPictures" Type="Self.PersonPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PersonPictures">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonPictures_Users1">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="PersonPictures" Type="Self.PersonPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PersonPictures">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StaffPerson_Persons">
+          <End Role="Persons" Type="Self.Person" Multiplicity="1" />
+          <End Role="StaffPerson" Type="Self.StaffPerson" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StaffPerson">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentPerson_Persons">
+          <End Role="Persons" Type="Self.Person" Multiplicity="1" />
+          <End Role="StudentPerson" Type="Self.StudentPerson" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentPerson">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentPerson_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="StudentPerson" Type="Self.StudentPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="StudentPerson">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentPerson_Users1">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="StudentPerson" Type="Self.StudentPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="StudentPerson">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IdentityDBEntitieskldkldks" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BloodGroups" EntityType="Self.BloodGroup" />
+          <EntitySet Name="Colleges" EntityType="Self.College" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Fingers" EntityType="Self.Finger" />
+          <EntitySet Name="GenericPersons" EntityType="Self.GenericPerson" />
+          <EntitySet Name="IDCardPrintCounts" EntityType="Self.IDCardPrintCount" />
+          <EntitySet Name="IDSnapshots" EntityType="Self.IDSnapshot" />
+          <EntitySet Name="PersonFingers" EntityType="Self.PersonFinger" />
+          <EntitySet Name="PersonPictures" EntityType="Self.PersonPicture" />
+          <EntitySet Name="Persons" EntityType="Self.Person" />
+          <EntitySet Name="StaffPersons" EntityType="Self.StaffPerson" />
+          <EntitySet Name="StudentPersons" EntityType="Self.StudentPerson" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Departments_College" Association="Self.FK_Departments_College">
+            <End Role="College" EntitySet="Colleges" />
+            <End Role="Departments" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StaffPerson_Departments" Association="Self.FK_StaffPerson_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="StaffPerson" EntitySet="StaffPersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentPerson_Departments" Association="Self.FK_StudentPerson_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="StudentPerson" EntitySet="StudentPersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GenericPerson_Persons" Association="Self.FK_GenericPerson_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="GenericPerson" EntitySet="GenericPersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GenericPerson_Users" Association="Self.FK_GenericPerson_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="GenericPerson" EntitySet="GenericPersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GenericPerson_Users1" Association="Self.FK_GenericPerson_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="GenericPerson" EntitySet="GenericPersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDCardPrintCount_Persons" Association="Self.FK_IDCardPrintCount_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="IDCardPrintCount" EntitySet="IDCardPrintCounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDSnapshot_Users" Association="Self.FK_IDSnapshot_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="IDSnapshot" EntitySet="IDSnapshots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IDSnapshot_Users1" Association="Self.FK_IDSnapshot_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="IDSnapshot" EntitySet="IDSnapshots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonFingers_IDSnapshot" Association="Self.FK_PersonFingers_IDSnapshot">
+            <End Role="IDSnapshot" EntitySet="IDSnapshots" />
+            <End Role="PersonFingers" EntitySet="PersonFingers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonPictures_IDSnapshot" Association="Self.FK_PersonPictures_IDSnapshot">
+            <End Role="IDSnapshot" EntitySet="IDSnapshots" />
+            <End Role="PersonPictures" EntitySet="PersonPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonFingers_Users" Association="Self.FK_PersonFingers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PersonFingers" EntitySet="PersonFingers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonFingers_Users1" Association="Self.FK_PersonFingers_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PersonFingers" EntitySet="PersonFingers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonPictures_Users" Association="Self.FK_PersonPictures_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PersonPictures" EntitySet="PersonPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonPictures_Users1" Association="Self.FK_PersonPictures_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PersonPictures" EntitySet="PersonPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StaffPerson_Persons" Association="Self.FK_StaffPerson_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="StaffPerson" EntitySet="StaffPersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentPerson_Persons" Association="Self.FK_StudentPerson_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="StudentPerson" EntitySet="StudentPersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentPerson_Users" Association="Self.FK_StudentPerson_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="StudentPerson" EntitySet="StudentPersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentPerson_Users1" Association="Self.FK_StudentPerson_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="StudentPerson" EntitySet="StudentPersons" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IdentityDBModelStoreContainer" CdmEntityContainer="IdentityDBEntitieskldkldks">
+          <EntitySetMapping Name="BloodGroups">
+            <EntityTypeMapping TypeName="IdentityDBModel.BloodGroup">
+              <MappingFragment StoreEntitySet="BloodGroup">
+                <ScalarProperty Name="BloodGroup1" ColumnName="BloodGroup" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Colleges">
+            <EntityTypeMapping TypeName="IdentityDBModel.College">
+              <MappingFragment StoreEntitySet="College">
+                <ScalarProperty Name="CollegeCode" ColumnName="CollegeCode" />
+                <ScalarProperty Name="CollegeName" ColumnName="CollegeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="IdentityDBModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="CollegeCode" ColumnName="CollegeCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fingers">
+            <EntityTypeMapping TypeName="IdentityDBModel.Finger">
+              <MappingFragment StoreEntitySet="Fingers">
+                <ScalarProperty Name="FingerId" ColumnName="FingerId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GenericPersons">
+            <EntityTypeMapping TypeName="IdentityDBModel.GenericPerson">
+              <MappingFragment StoreEntitySet="GenericPerson">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
+                <ScalarProperty Name="CompanyRegNo" ColumnName="CompanyRegNo" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="DateLastModified" ColumnName="DateLastModified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IDCardPrintCounts">
+            <EntityTypeMapping TypeName="IdentityDBModel.IDCardPrintCount">
+              <MappingFragment StoreEntitySet="IDCardPrintCount">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdentityNo" ColumnName="IdentityNo" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IDSnapshots">
+            <EntityTypeMapping TypeName="IdentityDBModel.IDSnapshot">
+              <MappingFragment StoreEntitySet="IDSnapshot">
+                <ScalarProperty Name="SnapshotID" ColumnName="SnapshotID" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="SnapshotDetails" ColumnName="SnapshotDetails" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="DateLastModified" ColumnName="DateLastModified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonFingers">
+            <EntityTypeMapping TypeName="IdentityDBModel.PersonFinger">
+              <MappingFragment StoreEntitySet="PersonFingers">
+                <ScalarProperty Name="PersonFingerId" ColumnName="PersonFingerId" />
+                <ScalarProperty Name="SnapshotId" ColumnName="SnapshotId" />
+                <ScalarProperty Name="FingerId" ColumnName="FingerId" />
+                <ScalarProperty Name="FID1" ColumnName="FID1" />
+                <ScalarProperty Name="FID2" ColumnName="FID2" />
+                <ScalarProperty Name="FID3" ColumnName="FID3" />
+                <ScalarProperty Name="FID4" ColumnName="FID4" />
+                <ScalarProperty Name="FMD" ColumnName="FMD" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="DateLastModified" ColumnName="DateLastModified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonPictures">
+            <EntityTypeMapping TypeName="IdentityDBModel.PersonPicture">
+              <MappingFragment StoreEntitySet="PersonPictures">
+                <ScalarProperty Name="PersonPictureID" ColumnName="PersonPictureID" />
+                <ScalarProperty Name="SnapshotId" ColumnName="SnapshotId" />
+                <ScalarProperty Name="OriginalImage" ColumnName="OriginalImage" />
+                <ScalarProperty Name="ProcessedImage" ColumnName="ProcessedImage" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="DateLastModified" ColumnName="DateLastModified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persons">
+            <EntityTypeMapping TypeName="IdentityDBModel.Person">
+              <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdentityNo" ColumnName="IdentityNo" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Middlename" ColumnName="Middlename" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="HealthCentreNo" ColumnName="HealthCentreNo" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CurrentPhoto" ColumnName="CurrentPhoto" />
+                <ScalarProperty Name="AuthorizedSignature" ColumnName="AuthorizedSignature" />
+                <ScalarProperty Name="CurrentSnapshotId" ColumnName="CurrentSnapshotId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="DateLastModified" ColumnName="DateLastModified" />
+                <ScalarProperty Name="IDCardPrintCount" ColumnName="IDCardPrintCount" />
+                <ScalarProperty Name="DateLastPrinted" ColumnName="DateLastPrinted" />
+                <ScalarProperty Name="WatermarkedPhoto" ColumnName="WatermarkedPhoto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StaffPersons">
+            <EntityTypeMapping TypeName="IdentityDBModel.StaffPerson">
+              <MappingFragment StoreEntitySet="StaffPerson">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="CurrentDesignation" ColumnName="CurrentDesignation" />
+                <ScalarProperty Name="CurrentPost" ColumnName="CurrentPost" />
+                <ScalarProperty Name="YearOfAppointment" ColumnName="YearOfAppointment" />
+                <ScalarProperty Name="CurrentDepartmentId" ColumnName="CurrentDepartmentId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="DateLastModified" ColumnName="DateLastModified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentPersons">
+            <EntityTypeMapping TypeName="IdentityDBModel.StudentPerson">
+              <MappingFragment StoreEntitySet="StudentPerson">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="EntrySession" ColumnName="EntrySession" />
+                <ScalarProperty Name="CurrentDepartmentId" ColumnName="CurrentDepartmentId" />
+                <ScalarProperty Name="CurrentLevel" ColumnName="CurrentLevel" />
+                <ScalarProperty Name="SponsorName" ColumnName="SponsorName" />
+                <ScalarProperty Name="SponsorPhone" ColumnName="SponsorPhone" />
+                <ScalarProperty Name="SponsorAddress" ColumnName="SponsorAddress" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="DateLastModified" ColumnName="DateLastModified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="IdentityDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="IdentityDBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="AuthenticateExternally" ColumnName="AuthenticateExternally" />
+                <ScalarProperty Name="AuthenticationProvider" ColumnName="AuthenticationProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/StudentPortal.WebServices" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/StudentPortal.WebServices" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="StudentRecord">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CGPA" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="College" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Department" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Firstname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Level" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MatricNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Middlename" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MinDuration" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PasswordHash" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PaymentStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProfileUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Programme" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sex" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SponsorAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SponsorName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SponsorPhone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Surname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UTMENo" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StudentRecord" nillable="true" type="tns:StudentRecord" />
+</xs:schema>

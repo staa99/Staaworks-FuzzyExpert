@@ -3,7 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Staaworks.BankExpert.WPF", "Staaworks.BankExpert.WPF\Staaworks.BankExpert.WPF.csproj", "{C55171A0-F168-4071-94AD-6AE762809463}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Staaworks.BankExpert.FuzzyExpert", "Staaworks.BankExpert.FuzzyExpert\Staaworks.BankExpert.FuzzyExpert.csproj", "{8332BD55-E462-4DC6-B7F6-07F2EC5DB812}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AForge.Core", "Core\AForge.Core.csproj", "{631AC093-430F-45F4-BA0C-AF0F0405918A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AForge.Fuzzy", "Fuzzy\AForge.Fuzzy.csproj", "{B631038F-E12C-4D0D-8B25-FF7F62FE62D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Staaworks.BankExpert.Fingerprint", "Staaworks.BankExpert.Fingerprint\Staaworks.BankExpert.Fingerprint.csproj", "{8FB5CC29-B5A4-400D-A7DC-B9AB237B242D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Staaworks.BankExpert.FacialRecognition", "Staaworks.BankExpert.FacialRecognition\Staaworks.BankExpert.FacialRecognition.csproj", "{141ACC40-2F25-4299-9199-6235FC12E56B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Staaworks.BankExpert.Core", "Staaworks.BankExpert.Core\Staaworks.BankExpert.Core.csproj", "{3AF007F1-B6FD-4853-A441-5AAC72ED3078}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Staaworks.BankExpert.Data", "Staaworks.BankExpert.Data\Staaworks.BankExpert.Data.csproj", "{5BF43238-954F-44DD-A3A6-5229721A50F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Staaworks.BankExpert.Shared", "Staaworks.BankExpert.Shared\Staaworks.BankExpert.Shared.csproj", "{EEC5C3DA-4025-4B3C-A606-17BD34E75F69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Staaworks.BankExpert.WinForms", "Staaworks.BankExpert.WinForms\Staaworks.BankExpert.WinForms.csproj", "{232D420C-8233-4BB2-A379-4D4BD1EFF0FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +27,42 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C55171A0-F168-4071-94AD-6AE762809463}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C55171A0-F168-4071-94AD-6AE762809463}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C55171A0-F168-4071-94AD-6AE762809463}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C55171A0-F168-4071-94AD-6AE762809463}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8332BD55-E462-4DC6-B7F6-07F2EC5DB812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8332BD55-E462-4DC6-B7F6-07F2EC5DB812}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8332BD55-E462-4DC6-B7F6-07F2EC5DB812}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8332BD55-E462-4DC6-B7F6-07F2EC5DB812}.Release|Any CPU.Build.0 = Release|Any CPU
+		{631AC093-430F-45F4-BA0C-AF0F0405918A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{631AC093-430F-45F4-BA0C-AF0F0405918A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{631AC093-430F-45F4-BA0C-AF0F0405918A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{631AC093-430F-45F4-BA0C-AF0F0405918A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B631038F-E12C-4D0D-8B25-FF7F62FE62D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B631038F-E12C-4D0D-8B25-FF7F62FE62D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B631038F-E12C-4D0D-8B25-FF7F62FE62D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B631038F-E12C-4D0D-8B25-FF7F62FE62D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FB5CC29-B5A4-400D-A7DC-B9AB237B242D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FB5CC29-B5A4-400D-A7DC-B9AB237B242D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FB5CC29-B5A4-400D-A7DC-B9AB237B242D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FB5CC29-B5A4-400D-A7DC-B9AB237B242D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{141ACC40-2F25-4299-9199-6235FC12E56B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{141ACC40-2F25-4299-9199-6235FC12E56B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{141ACC40-2F25-4299-9199-6235FC12E56B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{141ACC40-2F25-4299-9199-6235FC12E56B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AF007F1-B6FD-4853-A441-5AAC72ED3078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AF007F1-B6FD-4853-A441-5AAC72ED3078}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AF007F1-B6FD-4853-A441-5AAC72ED3078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AF007F1-B6FD-4853-A441-5AAC72ED3078}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BF43238-954F-44DD-A3A6-5229721A50F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BF43238-954F-44DD-A3A6-5229721A50F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BF43238-954F-44DD-A3A6-5229721A50F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BF43238-954F-44DD-A3A6-5229721A50F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEC5C3DA-4025-4B3C-A606-17BD34E75F69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEC5C3DA-4025-4B3C-A606-17BD34E75F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEC5C3DA-4025-4B3C-A606-17BD34E75F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEC5C3DA-4025-4B3C-A606-17BD34E75F69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{232D420C-8233-4BB2-A379-4D4BD1EFF0FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{232D420C-8233-4BB2-A379-4D4BD1EFF0FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{232D420C-8233-4BB2-A379-4D4BD1EFF0FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{232D420C-8233-4BB2-A379-4D4BD1EFF0FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

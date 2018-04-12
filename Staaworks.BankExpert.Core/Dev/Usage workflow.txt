@@ -1,0 +1,34 @@
+﻿for the expert:
+	for a context:
+		Define the variables, fuzzysets and rules
+		set name of output variable to an existing variable defined up
+		
+		Create questions
+			set name to an existing variable created up
+			set user text as text for user to read
+			set options as {name: text, user text: text, value number} to set as input for the variable reperesented by option.name
+		
+		set output
+			set name as name of variable specified up
+			
+			set definition as list of the under type
+				name: text
+				value: number
+				leads to other context: boolean (if leads to other context, then name must be the name of the context)
+
+				// IMPLEMENTATION DONE
+
+
+for the user:
+	request context: (repeatable 1)
+		choose options for questions in context :-> system chooses mapped values as input for option.name. Users see option.[user text]
+		pass to system to work on and get a value for the output variable
+		the value for the output variable is then compared with the values in output definition
+		the result selected from output definition returns a text that is displayed to the user if it does not lead to another context, if it does then do (repeatable 1) ie request context, if no result is found, The text "I'm sorry, I can't help you" is displayed to the user.
+
+
+
+for the system:
+	to create context:
+		provide input method for declarations
+		provide input method for questions stored in the format described for expert entry

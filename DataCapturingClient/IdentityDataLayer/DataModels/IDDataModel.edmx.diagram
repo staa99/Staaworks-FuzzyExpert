@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="da8bdbcd9dac482485ac19d8905c7aa2" Name="Diagram1">
+        <EntityTypeShape EntityType="IdentityDBModel.BloodGroup" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdentityDBModel.Finger" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdentityDBModel.GenericPerson" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdentityDBModel.PersonPicture" Width="1.5" PointX="10" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdentityDBModel.StaffPerson" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdentityDBModel.User" Width="1.5" PointX="0.75" PointY="8.125" />
+        <AssociationConnector Association="IdentityDBModel.FK_GenericPerson_Users" />
+        <AssociationConnector Association="IdentityDBModel.FK_GenericPerson_Users1" />
+        <AssociationConnector Association="IdentityDBModel.FK_PersonPictures_Users" />
+        <AssociationConnector Association="IdentityDBModel.FK_PersonPictures_Users1" />
+        <EntityTypeShape EntityType="IdentityDBModel.PersonFinger" Width="1.5" PointX="10" PointY="1.875" />
+        <AssociationConnector Association="IdentityDBModel.FK_PersonFingers_Fingers" />
+        <AssociationConnector Association="IdentityDBModel.FK_PersonFingers_Users" />
+        <AssociationConnector Association="IdentityDBModel.FK_PersonFingers_Users1" />
+        <EntityTypeShape EntityType="IdentityDBModel.IDSnapshot" Width="1.5" PointX="3" PointY="13.75" />
+        <AssociationConnector Association="IdentityDBModel.FK_IDSnapshot_Users" />
+        <AssociationConnector Association="IdentityDBModel.FK_IDSnapshot_Users1" />
+        <AssociationConnector Association="IdentityDBModel.FK_PersonFingers_IDSnapshot" />
+        <AssociationConnector Association="IdentityDBModel.FK_PersonPictures_IDSnapshot" />
+        <EntityTypeShape EntityType="IdentityDBModel.College" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="IdentityDBModel.Department" Width="1.5" PointX="0.75" PointY="3.5" />
+        <EntityTypeShape EntityType="IdentityDBModel.Person" Width="1.5" PointX="5.25" PointY="3.625" />
+        <AssociationConnector Association="IdentityDBModel.FK_Persons_BloodGroup" />
+        <AssociationConnector Association="IdentityDBModel.FK_Departments_College" />
+        <AssociationConnector Association="IdentityDBModel.FK_StaffPerson_Departments" />
+        <AssociationConnector Association="IdentityDBModel.FK_GenericPerson_Persons" />
+        <AssociationConnector Association="IdentityDBModel.FK_Persons_Users" />
+        <AssociationConnector Association="IdentityDBModel.FK_Persons_Users1" />
+        <AssociationConnector Association="IdentityDBModel.FK_StaffPerson_Persons" />
+        <EntityTypeShape EntityType="IdentityDBModel.Config" Width="1.5" PointX="5.375" PointY="11.75" />
+        <EntityTypeShape EntityType="IdentityDBModel.StudentPerson" Width="1.5" PointX="7.5" PointY="5.875" />
+        <AssociationConnector Association="IdentityDBModel.FK_StudentPerson_Departments" />
+        <AssociationConnector Association="IdentityDBModel.FK_StudentPerson_Persons" />
+        <AssociationConnector Association="IdentityDBModel.FK_StudentPerson_Users" />
+        <AssociationConnector Association="IdentityDBModel.FK_StudentPerson_Users1" />
+        <EntityTypeShape EntityType="IdentityDBModel.StudentCategory" Width="1.5" PointX="7.375" PointY="11.875" />
+        <AssociationConnector Association="IdentityDBModel.FK_StudentPerson_StudentCategory" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

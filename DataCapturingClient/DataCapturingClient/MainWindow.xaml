@@ -1,0 +1,26 @@
+﻿<Window x:Class="DataCapturingClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataCapturingClient"
+        mc:Ignorable="d"
+        Title="FUNAAB Identity Management System" Height="350" Width="525">
+    <Window.Resources>
+        <ResourceDictionary>
+
+            <BitmapImage x:Key="logo" UriSource="Resources/FUNAAB-Logo.png" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="952">
+            <MenuItem Header="File">
+                <MenuItem Header="Exit" HorizontalAlignment="Left" Width="140"/>
+            </MenuItem>
+            <MenuItem x:Name="mnuFetchRecord" Header="Fetch Record" Click="mnuFetchRecord_Click" />
+            <MenuItem Header="Help"/>
+        </Menu>
+        <Image x:Name="image" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Source="{StaticResource logo}" Height="250.8"/>
+    </Grid>
+</Window>

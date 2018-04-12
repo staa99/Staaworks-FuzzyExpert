@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="aca0c49d746b4853a338108feb54abaa" Name="Diagram1">
+        <EntityTypeShape EntityType="IdentityDBModel.BloodGroup" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdentityDBModel.College" Width="1.5" PointX="1.5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdentityDBModel.Department" Width="1.5" PointX="3.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdentityDBModel.Finger" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdentityDBModel.GenericPerson" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdentityDBModel.IDCardPrintCount" Width="1.5" PointX="6" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdentityDBModel.IDSnapshot" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdentityDBModel.PersonFinger" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdentityDBModel.PersonPicture" Width="1.5" PointX="8.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdentityDBModel.Person" Width="1.5" PointX="3.75" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdentityDBModel.StaffPerson" Width="1.5" PointX="9" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdentityDBModel.StudentPerson" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdentityDBModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IdentityDBModel.User" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="IdentityDBModel.FK_Departments_College" ManuallyRouted="false" />
+        <AssociationConnector Association="IdentityDBModel.FK_StaffPerson_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="IdentityDBModel.FK_StudentPerson_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="IdentityDBModel.FK_GenericPerson_Persons" ManuallyRouted="false" />
+        <AssociationConnector Association="IdentityDBModel.FK_GenericPerson_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="IdentityDBModel.FK_GenericPerson_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="IdentityDBModel.FK_IDCardPrintCount_Persons" ManuallyRouted="false" />
+        <AssociationConnector Association="IdentityDBModel.FK_IDSnapshot_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="IdentityDBModel.FK_IDSnapshot_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="IdentityDBModel.FK_PersonFingers_IDSnapshot" ManuallyRouted="false" />
+        <AssociationConnector Association="IdentityDBModel.FK_PersonPictures_IDSnapshot" ManuallyRouted="false" />
+        <AssociationConnector Association="IdentityDBModel.FK_PersonFingers_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="IdentityDBModel.FK_PersonFingers_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="IdentityDBModel.FK_PersonPictures_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="IdentityDBModel.FK_PersonPictures_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="IdentityDBModel.FK_StaffPerson_Persons" ManuallyRouted="false" />
+        <AssociationConnector Association="IdentityDBModel.FK_StudentPerson_Persons" ManuallyRouted="false" />
+        <AssociationConnector Association="IdentityDBModel.FK_StudentPerson_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="IdentityDBModel.FK_StudentPerson_Users1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
