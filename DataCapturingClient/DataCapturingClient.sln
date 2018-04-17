@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataCapturingClient", "DataCapturingClient\DataCapturingClient.csproj", "{078B8119-BA80-4A20-A322-ACCA7C1144D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityBusinessLayer", "IdentityBusinessLayer\IdentityBusinessLayer.csproj", "{23344C0D-77EB-4A65-A269-2B8866345EA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityDataLayer", "IdentityDataLayer\IdentityDataLayer.csproj", "{226986AA-3308-42CB-8788-B41F4FD8222C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServiceLayer", "IdentityServiceLayer\IdentityServiceLayer.csproj", "{A94BF4CB-03E5-4C31-9BE8-56602D4D155A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityCommons", "IdentityCommons\IdentityCommons.csproj", "{99EDADA0-9B9F-4D71-9ED7-B119EA06C660}"
 EndProject
@@ -35,10 +33,6 @@ Global
 		{226986AA-3308-42CB-8788-B41F4FD8222C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{226986AA-3308-42CB-8788-B41F4FD8222C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{226986AA-3308-42CB-8788-B41F4FD8222C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A94BF4CB-03E5-4C31-9BE8-56602D4D155A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A94BF4CB-03E5-4C31-9BE8-56602D4D155A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A94BF4CB-03E5-4C31-9BE8-56602D4D155A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A94BF4CB-03E5-4C31-9BE8-56602D4D155A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{99EDADA0-9B9F-4D71-9ED7-B119EA06C660}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{99EDADA0-9B9F-4D71-9ED7-B119EA06C660}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99EDADA0-9B9F-4D71-9ED7-B119EA06C660}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -54,5 +48,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4DD7FB09-F5ED-4DF1-8654-B866FC1E97A4}
 	EndGlobalSection
 EndGlobal

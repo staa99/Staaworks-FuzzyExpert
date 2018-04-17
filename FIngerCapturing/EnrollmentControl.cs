@@ -16,7 +16,7 @@ namespace FingerCapturing
         private DPCtlUruNet.EnrollmentControl _enrollmentControl;
 
         public delegate void saveandclose();
-        public event saveandclose Scevent;
+        public event saveandclose SCevent;
         public MainObject Currentinstance { get; set; }
         /*public Form_Main Sender
         {
@@ -178,9 +178,9 @@ namespace FingerCapturing
         {
             // saveandclose sc = new saveandclose(this.closeform);
             // sc();
-            if (Scevent != null)
+            if (SCevent != null)
             {
-                Scevent();
+                SCevent();
             }
             this.Close();
         }

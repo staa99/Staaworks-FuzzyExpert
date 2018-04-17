@@ -4,22 +4,12 @@ using FingerCapturing;
 using FIngerCapturing.Common;
 using IdentityBusinessLayer.Repositories;
 using IdentityCommons;
-using IdentityCommons.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace DataCapturingClient
 {
@@ -114,49 +104,7 @@ namespace DataCapturingClient
         {
             savefingerprint();
         }
-        private void btnEnrollFingers_Click(object sender, RoutedEventArgs e)
-        {
-
-            if (_readerSelection == null)
-            {
-                _readerSelection = new ReaderSelection();
-                // _readerSelection.Sender = this;
-                _readerSelection.Currentinstance = mobj;
-            }
-
-            _readerSelection.ShowDialog(); ;
-
-            if (enrollmentControl == null)
-            {
-                enrollmentControl = new EnrollmentControl();
-                enrollmentControl.scevent += savebiometriconformclose;
-                // enrollmentControl.Sender = new MainObject(); // this;
-
-               // mobj.CurrentReader = mobj.CurrentReader;
-                enrollmentControl.Currentinstance = mobj; // this;
-               
-            }
-            bio_altered = true;
-            enrollmentControl.ShowDialog();
-           
-        }
-        private static BitmapImage LoadImage(byte[] imageData)
-        {
-            if (imageData == null || imageData.Length == 0) return null;
-            var image = new BitmapImage();
-            using (var mem = new MemoryStream(imageData))
-            {
-                mem.Position = 0;
-                image.BeginInit();
-                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.UriSource = null;
-                image.StreamSource = mem;
-                image.EndInit();
-            }
-            image.Freeze();
-            return image;
-        }
+        
 
         private void btnSaveChanges_Click(object sender, RoutedEventArgs e)
         {
@@ -230,6 +178,49 @@ namespace DataCapturingClient
 
         }
 
+        private void btnEnrollFingers_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (_readerSelection == null)
+            {
+                _readerSelection = new ReaderSelection();
+                // _readerSelection.Sender = this;
+                _readerSelection.Currentinstance = mobj;
+            }
+
+            _readerSelection.ShowDialog(); ;
+
+            if (enrollmentControl == null)
+            {
+                enrollmentControl = new EnrollmentControl();
+                enrollmentControl.Scevent += savebiometriconformclose;
+                // enrollmentControl.Sender = new MainObject(); // this;
+
+                // mobj.CurrentReader = mobj.CurrentReader;
+                enrollmentControl.Currentinstance = mobj; // this;
+
+            }
+            bio_altered = true;
+            enrollmentControl.ShowDialog();
+
+        }
+        private static BitmapImage LoadImage(byte[] imageData)
+        {
+            if (imageData == null || imageData.Length == 0) return null;
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(imageData))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
+        }
         private void savepic()
         {
             try {
@@ -279,7 +270,7 @@ namespace DataCapturingClient
                 MessageBox.Show("Error Saving FingerPrint. Details:"+ex.StackTrace, "Alert");
             }
         }
-        public  byte[] ImageToByte(System.Drawing.Image img)
+        public  byte[] ImageToByte(Image img)
         {
             ImageConverter converter = new ImageConverter();
             return (byte[])converter.ConvertTo(img, typeof(byte[]));

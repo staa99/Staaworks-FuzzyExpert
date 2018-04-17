@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fuzzy\AForge.Fuzzy.csproj">
@@ -58,14 +59,6 @@
     <ProjectReference Include="..\Staaworks.BankExpert.Data\Staaworks.BankExpert.Data.csproj">
       <Project>{5bf43238-954f-44dd-a3a6-5229721a50f7}</Project>
       <Name>Staaworks.BankExpert.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Staaworks.BankExpert.FacialRecognition\Staaworks.BankExpert.FacialRecognition.csproj">
-      <Project>{141acc40-2f25-4299-9199-6235fc12e56b}</Project>
-      <Name>Staaworks.BankExpert.FacialRecognition</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Staaworks.BankExpert.Fingerprint\Staaworks.BankExpert.Fingerprint.csproj">
-      <Project>{8fb5cc29-b5a4-400d-a7dc-b9ab237b242d}</Project>
-      <Name>Staaworks.BankExpert.Fingerprint</Name>
     </ProjectReference>
     <ProjectReference Include="..\Staaworks.BankExpert.FuzzyExpert\Staaworks.BankExpert.FuzzyExpert.csproj">
       <Project>{8332bd55-e462-4dc6-b7f6-07f2ec5db812}</Project>

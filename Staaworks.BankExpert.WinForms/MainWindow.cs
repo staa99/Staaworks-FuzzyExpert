@@ -1,76 +1,94 @@
 ﻿using Staaworks.BankExpert.Core.Repositories;
 using Staaworks.BankExpert.Shared.Models;
 using Staaworks.BankExpert.WinForms.Interfaces;
-using System;
+using Staaworks.BankExpert.WinForms.Registration;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System;
 
 namespace Staaworks.BankExpert.WinForms
 {
     public partial class MainWindow : Form, IQuestionOptionReciever
     {
-        private const string ROOT_CONTEXT_NAME = "RootContext";
-        private Dictionary<Question, Option> Questions { get; set; }
-        private QuestionView QuestionView { get; set; }
-        private Context CurrentContext { get; set; }
-        
+        public IDictionary<string, Action> Tasks { get; }
+        public Dictionary<string, IViewDataHolder> Data { get; }
 
         public MainWindow()
         {
+            Data = new Dictionary<string, IViewDataHolder>
+            {
+                ["QuestionAndAnswer"] = new QuestionAndAnswerViewDataHolder(this),
+                ["Registration"] = new UserCreatorData(this)
+            };
+
+            Tasks = new Dictionary<string, Action>
+            {
+                ["QuestionAndAnswer"] = InitializeQuestionView,
+                ["Registration"] = LoadRegistrationForm
+            };
+
             InitializeComponent();
-            InitializeQuestionView();
+            LoadTask("QuestionAndAnswer");
         }
+
 
 
         public void InitializeQuestionView()
         {
-            QuestionView = new QuestionView(this);
-            CurrentContext = QuestionRepository.LoadContext(ROOT_CONTEXT_NAME);
-            UpdateQuestionView();
+            ClearControls();
+            (Data["QuestionAndAnswer"] as QuestionAndAnswerViewDataHolder).PopulateControl();
         }
 
 
-        private void UpdateQuestionView()
+        public void LoadRegistrationForm()
         {
-            Questions = CurrentContext.Questions.ToDictionary<Question, Question, Option>(q => q, q => null);
-            LoadNextQuestion();
-            ControlHost.Controls.Add(QuestionView);
+            ClearControls();
+            (Data["Registration"] as UserCreatorData).PopulateControl();
         }
 
+        public void LoadTask(string task)
+        {
+            Tasks[task].Invoke();
+        }
 
         public void SetQuestionValue(Question question, Option option)
         {
-            Questions[question] = option;
-            if (Questions.Any(p => p.Value == null))
+            var holder = Data["QuestionAndAnswer"] as QuestionAndAnswerViewDataHolder;
+            holder.Questions[question] = option;
+            if (holder.Questions.Any(p => p.Value == null))
             {
-                LoadNextQuestion();
+                holder.LoadNextQuestion();
             }
             else
             {
                 // Last Question treated
-                var response = QuestionRepository.TreatUserInput(Questions);
+                var response = QuestionRepository.TreatUserInput(holder.Questions);
                 if (response.text != null)
                 {
-                    QuestionView.DisplayFinalResult(response.text);
+                    holder.QuestionView.DisplayFinalResult(response.text);
                 }
                 else if (response.context != null)
                 {
-                    CurrentContext = response.context;
-                    UpdateQuestionView();
+                    holder.CurrentContext = response.context;
+                    holder.UpdateQuestionView();
                 }
             }
         }
 
-
-        private void LoadNextQuestion()
+        public void AddControl(Control control)
         {
-            QuestionView.SetCurrentQuestion(Questions.First(p => p.Value == null).Key, Questions.Count(p => p.Value == null) <= 1);
+            ControlHost.Controls.Add(control);
+        }
+
+        public void RemoveControl(Control control)
+        {
+            ControlHost.Controls.Remove(control);
+        }
+
+        public void ClearControls()
+        {
+            ControlHost.Controls.Clear();
         }
     }
 }

@@ -45,6 +45,8 @@
     <Compile Include="Models\Output.cs" />
     <Compile Include="Models\OutputDefinition.cs" />
     <Compile Include="Models\Question.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
