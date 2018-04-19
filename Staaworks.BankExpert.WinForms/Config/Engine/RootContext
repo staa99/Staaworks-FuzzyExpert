@@ -1,0 +1,153 @@
+﻿#Car distances
+{
+	set Near = [15, 50, edge: right]
+}
+{
+	set Medium = [15, 50, 60, 100]
+}
+{
+	set Far = [60, 100, edge: left]
+}
+
+#Angles
+{
+	set VeryNegative = [-40, -35, edge: right]
+}
+{
+	set Negative = [-40, -35, -25, -20]
+}
+
+{
+	set LittleNegative = [-25, -20, -10, -5]
+}
+{
+	set Zero = [-10, 5, 5, 10]
+}
+{
+	set LittlePositive = [5, 10, 20, 25]
+}
+{
+	set Positive = [20, 25, 35, 40]
+}
+{
+	set VeryPositive = [35, 40, edge: left]
+}
+
+
+
+
+# Distances variables
+{
+	var RightDistance =	min: 0;
+						max: 120;
+						labels: [Near, Medium, Far];
+						text: "How far is the nearest obstacle to the right of the car?";
+						// source can be one of (user | actual source)
+						// when source is not user, actual system source must be provided
+						source: user
+						// source: user.car.frontalDistance
+						options:[
+									option1:[type: fixed, text: "Near", value: 32.5],
+									option2:[type: fixed, text: "Average", value: 42.5],
+									option3:[type: fixed, text: "Far", value: 80],
+									option4:[type: freetext, text: "Specific Value", value: 0]
+								]
+}
+
+
+
+{
+	var LeftDistance =	min: 0;
+						max: 120;
+						labels: [Near, Medium, Far];
+						text: "How far is the nearest obstacle to the left of the car?";
+						// source can be one of (user | actual source)
+						// when source is not user, actual system source must be provided
+						source: user
+						// source: user.car.frontalDistance
+						options:[
+									option1:[type: fixed, text: "Near", value: 32.5],
+									option2:[type: fixed, text: "Average", value: 42.5],
+									option3:[type: fixed, text: "Far", value: 80],
+									option4:[type: freetext, text: "Specific Value", value: 0]
+								]
+}
+
+
+
+{
+	var FrontalDistance =	min: 0;
+							max: 120;
+							labels: [Near, Medium, Far];
+							text: "How far is the nearest obstacle to the front of the car?";
+							// source can be one of (user | actual source)
+							// when source is not user, actual system source must be provided
+							source: user
+							// source: user.car.frontalDistance
+							options:[
+							// type can be one of (fixed | freetext). default fixed
+							// There can be AT MOST one freetext option
+										option1:[type: fixed, text: "Near", value: 32.5],
+										option2:[type: fixed, text: "Average", value: 42.5],
+										option3:[type: fixed, text: "Far", value: 80],
+										option4:[type: freetext, text: "Specific Value", value: 0]
+									]
+}
+
+
+
+# Resultant Angle
+{
+	var Angle = min: -50;
+				max: 50;
+				labels: [VeryNegative, Negative, LittleNegative, Zero, LittlePositive, Positive, VeryPositive]
+				// definitions type can be any of (overflow | fixed). Default is overflow
+				definitionsType: overflow;
+				outputDefinitions:	[
+				// default value for isContext is false. So if it is unspecified, false is used
+										d1: [text: "The car will turn a sharp right", value: 40, isContext: false],
+										d2: [text: "The car will turn a sharp left", value: -40, isContext: false],
+										d3: [text: "The car will turn right", value: 20, isContext: false],
+										d4: [text: "The car will turn left", value: -20, isContext: false],
+										d5: [text: "The car will turn right a little", value: 2, isContext: false],
+										d6: [text: "The car will turn left a little", value: -2, isContext: false],
+										d7: [text: "StopOrStraight", value: 0, isContext: true]
+									]
+}
+
+
+# rules
+{
+	rule Rule1 = clause: "IF FrontalDistance IS Far THEN Angle IS Zero";
+				 description: "Prevents the car from turning when there is still a lot of space ahead"
+}
+{
+	rule Rule2 = clause: "IF FrontalDistance IS Far AND RightDistance IS Far AND LeftDistance IS Far THEN Angle IS Zero";
+				 description: "Prevents the car from turning when it is in a wide open space"
+}
+{
+	rule Rule3 = clause: "IF RightDistance IS Near AND LeftDistance IS Medium THEN Angle IS LittleNegative";
+				 description: "Turns the car a little to the left if there is very little space on the right and a reasonable amount of space on the left"
+}
+{
+	rule Rule4 = clause: "IF RightDistance IS Medium AND LeftDistance IS Near THEN Angle IS LittlePositive";
+				 description: "Turns the car a little to the right if there is very little space on the left and a reasonable amount of space on the right"
+}
+
+{
+	rule Rule5 = clause: "IF RightDistance IS Far AND FrontalDistance IS Near THEN Angle IS Positive";
+				 description: "Turns the car to the right if there is a lot of space on the right and little on the front"
+}
+
+{
+	rule Rule6 = clause: "IF LeftDistance IS Far AND FrontalDistance IS Near THEN Angle IS Negative";
+				 description: "Turns the car to the left if there is a lot of space on the left and little on the front"
+}
+
+{
+	rule Rule7 = clause: "IF RightDistance IS Far AND LeftDistance IS Far AND FrontalDistance IS Near THEN Angle IS Positive";
+				 description: "Turns the car to the right when there is a lot of space on the sides and very little space ahead"
+}
+
+
+

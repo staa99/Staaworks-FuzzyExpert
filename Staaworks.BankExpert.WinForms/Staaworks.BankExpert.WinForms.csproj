@@ -35,8 +35,15 @@
     <Reference Include="DPUruNet">
       <HintPath>..\FingerprintBiometricsLibrary\DPUruNet.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -52,7 +59,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\IFingerprintCapturingReciever.cs" />
     <Compile Include="Interfaces\IQuestionOptionReciever.cs" />
-    <Compile Include="IViewDataHolder.cs" />
+    <Compile Include="Interfaces\IViewDataHolder.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,13 +68,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QuestionAndAnswerViewDataHolder.cs" />
-    <Compile Include="QuestionView.cs">
+    <Compile Include="QuestionAndAnswer\QuestionAndAnswerViewDataHolder.cs" />
+    <Compile Include="QuestionAndAnswer\QuestionView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="QuestionView.Designer.cs">
+    <Compile Include="QuestionAndAnswer\QuestionView.Designer.cs">
       <DependentUpon>QuestionView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Registration\UserCreatorData.cs" />
+    <Compile Include="Registration\UserCreatorFingerprintData.cs" />
     <Compile Include="Registration\UserCreator_BasicForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -86,12 +95,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="QuestionView.resx">
+    <EmbeddedResource Include="QuestionAndAnswer\QuestionView.resx">
       <DependentUpon>QuestionView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Registration\UserCreator_BasicForm.resx">
       <DependentUpon>UserCreator_BasicForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Config\Engine\RootContext" />
+    <None Include="Config\Engine\StopOrStraight" />
+    <None Include="Config\Engine\TestDateDifferenceKnowledge" />
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\Staaworks.BankExpert.Shared.Models.Question.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -122,6 +135,10 @@
       <Project>{eec5c3da-4025-4b3c-a606-17bd34e75f69}</Project>
       <Name>Staaworks.BankExpert.Shared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Config\Engine\ATM_Dispense_Error" />
+    <Content Include="Config\Engine\Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

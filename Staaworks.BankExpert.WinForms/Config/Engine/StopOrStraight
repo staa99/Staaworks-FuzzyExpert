@@ -1,0 +1,96 @@
+# Car decisions
+{
+    set Yes = [10, 20, 30, 40]
+}
+
+{
+    set No = [50, 60, 70, 80]
+}
+
+{
+    set Stop = [0, 0.25, 0.5]
+}
+
+{
+    set Continue = [0.5, 0.75, 1]
+}
+
+
+{
+    var WillStop =  min: 10;
+                    max: 80;
+                    labels: [Yes, No];
+                    text: "Do you want to stop now?";
+                    source: user;
+                    options:
+                    [
+                        option1:
+                        [
+                            type: fixed,
+                            text: "Yes",
+                            value: 40
+                        ],
+                        option2:
+                        [
+                            type: fixed,
+                            text: "No",
+                            value: 10
+                        ]
+                    ]
+}
+
+{
+    var WillContinue =  min: 10;
+                        max: 80;
+                        labels: [Yes, No];
+                        text: "Do you want to continue going forward?";
+                        source: user;
+                        options:
+                        [
+                            option1:
+                            [
+                                type: fixed,
+                                text: "Yes",
+                                value: 50
+                            ],
+                            option2:
+                            [
+                                type: fixed,
+                                text: "No",
+                                value: 80
+                            ]
+                        ]
+}
+
+
+{
+    var Decision =  min: 0;
+                    max: 1;
+                    labels: [Stop, Continue];
+                    definitionsType: overflow;
+                    outputDefinitions:
+                    [
+                        d1:
+                        [
+                            text: "The car will halt",
+                            value: 0,
+                            isContext: false
+                        ],
+
+                        d2:
+                        [
+                            text: "The car will move on",
+                            value: 0.5,
+                            isContext: false
+                        ]
+                    ]
+}
+
+
+{
+    rule StopRule = clause: "IF WillStop IS Yes THEN Decision IS Stop"
+}
+
+{
+    rule ContinueRule = clause: "IF WillContinue IS Yes THEN Decision IS Continue"
+}

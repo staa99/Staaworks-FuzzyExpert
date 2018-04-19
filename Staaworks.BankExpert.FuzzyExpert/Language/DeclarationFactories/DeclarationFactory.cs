@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Staaworks.BankExpert.Shared.Cache;
 using static Staaworks.BankExpert.FuzzyExpert.Language.StatementBuilder;
 
 namespace Staaworks.BankExpert.FuzzyExpert.Language.DeclarationFactories
@@ -259,7 +260,7 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language.DeclarationFactories
                 };
 
 
-                if (hasOptions)
+                if (hasSource)
                 {
                     context.Questions.Add(new Question
                     {
@@ -379,6 +380,8 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language.DeclarationFactories
     }
 
 
+
+
     public static class RuleDeclarationFactory
     {
         public static RuleDeclaration ToRuleDeclaration(this IEnumerable<Token> tokens, string identifier)
@@ -403,6 +406,176 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language.DeclarationFactories
             {
                 throw new ArgumentNullException("The rule with id: " + identifier + " was not correctly declared", ex);
             }
+        }
+    }
+
+
+
+
+
+    public static class SourceParser
+    {
+        public static object Evaluate(string source)
+        {
+            OpTree function = source;
+            return function.Evaluate();
+        }
+
+
+        private class OpTree
+        {
+            public string Operator { get; set; }
+            public OpType Type { get; set; }
+            public OpTree Operand1 { get; set; }
+            public OpTree Operand2 { get; set; }
+            
+
+            public object Evaluate()
+            {
+                Operator = Operator.Trim();
+
+                if (Type == OpType.value)
+                {
+                    return SystemGeneratedSourceCache.Data[Operator];
+                }
+                else if (Type == OpType.binary)
+                {
+                    var a = Convert.ToDouble(Operand1.Evaluate());
+                    var b = Convert.ToDouble(Operand2.Evaluate());
+
+                    switch (Operator)
+                    {
+                        case "sum": return a + b;
+                        case "subtract": return a - b;
+                        case "multiply": return a * b;
+                        case "divide": return a / b;
+                        case "mod": return a % b;
+                        case "pow": return Math.Pow(a, b);
+                        case "log": return Math.Log(a, b);
+                        case "max": return Math.Max(a, b);
+                        case "min": return Math.Min(a, b);
+                    }
+                }
+                else 
+                {
+                    var a = Convert.ToDouble(Operand1.Evaluate());
+
+                    switch (Operator)
+                    {
+                        case "abs": return Math.Abs(a);
+                        case "sin": return Math.Sin(a);
+                        case "arcsin": return Math.Asin(a);
+                        case "cos": return Math.Cos(a);
+                        case "arccos": return Math.Acos(a);
+                        case "tan": return Math.Tan(a);
+                        case "arctan": return Math.Atan(a);
+                        case "sinh": return Math.Sinh(a);
+                        case "cosh": return Math.Cosh(a);
+                        case "tanh": return Math.Tanh(a);
+                        case "round": return Math.Round(a);
+                        case "sqrt": return Math.Sqrt(a);
+                        case "square": return Math.Pow(a, 2);
+                        case "cbrt": return Math.Pow(a, 1 / (3 + 0.0));
+                        case "cube": return Math.Pow(a, 3);
+                        case "pi": return Math.PI * a;
+                        case "e": return Math.E * a;
+                        case "ln": return Math.Log(a);
+                        case "log": return Math.Log10(a);
+                        case "exp": return Math.Exp(a);
+                    }
+                }
+
+                throw new InvalidOperationException("The function: " + Operator + " is not defined");
+            }
+
+            public static implicit operator OpTree (string raw)
+            {
+                raw = raw.Trim();
+
+                int parenthesisStartIndex = raw.IndexOf('(');
+                int parenthesisEndIndex = raw.LastIndexOf(')');
+
+                int commaIndex = -1;
+                int level = 0;
+                for (int i = parenthesisStartIndex + 2; i < parenthesisEndIndex; i++)
+                {
+                    if (level == 0 && raw[i] == ',')
+                    {
+                        commaIndex = i;
+                        break;
+                    }
+                    else if (raw[i] == '(')
+                    {
+                        level++;
+                    }
+                    else if (raw[i] == ')')
+                    {
+                        level--;
+                    }
+                }
+
+                if (parenthesisStartIndex > 0 && parenthesisEndIndex > parenthesisStartIndex)
+                {
+                    OpType type = commaIndex > parenthesisStartIndex ? OpType.binary : OpType.unary;
+                    string op;
+                    OpTree op1, op2;
+
+
+                    op = string.Join("", raw.Take(parenthesisStartIndex));
+
+                    int op1StartIndex, op1EndIndex, op2StartIndex, op2EndIndex;
+
+                    op1StartIndex = parenthesisStartIndex + 1;
+
+                    if (type == OpType.unary)
+                    {
+                        op1EndIndex = parenthesisEndIndex - 1;
+                        op1 = raw.Substring(op1StartIndex, op1EndIndex - op1StartIndex + 1);
+                        op2 = null;
+                    }
+                    else
+                    {
+                        op1EndIndex = commaIndex - 1;
+                        op2StartIndex = commaIndex + 1;
+                        op2EndIndex = parenthesisEndIndex - 1;
+
+                        op1 = raw.Substring(op1StartIndex, op1EndIndex - op1StartIndex + 1);
+                        op2 = raw.Substring(op2StartIndex, op2EndIndex - op2StartIndex + 1);
+                    }
+
+                    return new OpTree
+                    {
+                        Operand1 = op1,
+                        Operand2 = op2,
+                        Operator = op,
+                        Type = type
+                    };
+                }
+                else
+                {
+                    if (double.TryParse(raw, out double value))
+                    {
+                        SystemGeneratedSourceCache.Data[raw] = value;
+                    }
+                    else if (!SystemGeneratedSourceCache.Data.ContainsKey(raw))
+                    {
+                        throw new InvalidOperationException("You can't use the value: " + raw + " in an expression because it has not been cached");
+                    }
+
+                    return new OpTree
+                    {
+                        Operand1 = null,
+                        Operand2 = null,
+                        Operator = raw,
+                        Type = OpType.value
+                    };
+                }
+            }
+        }
+
+        private enum OpType
+        {
+            unary, binary, value
         }
     }
 }

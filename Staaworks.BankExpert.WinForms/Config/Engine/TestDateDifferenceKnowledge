@@ -1,0 +1,61 @@
+﻿#Distances of user inputted date from real registration date
+{
+	set Near = [0, 100, edge: right]
+}
+{
+	set Medium = [0, 100, 200, 366]
+}
+{
+	set Far = [200, 366, edge: left]
+}
+
+#Chances that the user is the owner of the account
+{
+	set High = [1, 0.75, edge: right]
+}
+{
+	set Average = [1, 0.75, 0.25, 0]
+}
+
+{
+	set Low = [0.25, 0, edge: left]
+}
+
+
+
+# Distances variables
+{
+	var DateDifference =	min: 0;
+							max: 120;
+							labels: [Near, Medium, Far];
+							text: "How far is the nearest obstacle to the right of the car?";
+							source: abs(user.regDateInDays - user.inputtedDateInDays)
+}
+
+
+
+
+# Resultant Choice
+{
+	var Chance = min: 0;
+				max: 1;
+				labels: [High, Average, Low]
+				// definitions type can be any of (overflow | fixed). Default is overflow
+				definitionsType: overflow;
+				outputDefinitions:	[
+										d1: [text: "TestSecurityQuestionKnowledge", value: 0, isContext: true]
+										d2: [text: "The user might be the owner", value: 0.5, isContext: false]
+										d3: [text: "The user is the owner, open up", value: 0.7, isContext: false]
+									]
+}
+
+
+# rules
+{
+	rule Rule1 = clause: "IF DateDifference IS Far THEN Chance IS Low";
+				 description: "Prevents the user from authenticating when there is a great difference between the date he specified and the real date"
+}
+{
+	rule Rule3 = clause: "IF DateDifference IS Near THEN Chance IS High";
+				 description: "Approves the user as the owner of the account"
+}

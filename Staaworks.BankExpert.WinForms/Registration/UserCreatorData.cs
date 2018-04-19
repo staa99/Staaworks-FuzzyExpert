@@ -9,6 +9,7 @@ namespace Staaworks.BankExpert.WinForms.Registration
         public IDataReciever Reciever { get; }
         public UserCreatorData(IDataReciever reciever)
         {
+            int a = 1000000000;
             Reciever = reciever;
             BioRegData = new BioRegData
             {

@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EEC5C3DA-4025-4B3C-A606-17BD34E75F69}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Staaworks.BankExpert.Shared</RootNamespace>
-    <AssemblyName>Staaworks.BankExpert.Shared</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <ProjectGuid>{FAB12186-B383-4314-8899-CA86F06EE93F}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>CommandLine_Tests</RootNamespace>
+    <AssemblyName>CommandLine Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,15 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cache\SystemGeneratedSourceCache.cs" />
-    <Compile Include="Models\Context.cs" />
-    <Compile Include="Models\Option.cs" />
-    <Compile Include="Models\Output.cs" />
-    <Compile Include="Models\OutputDefinition.cs" />
-    <Compile Include="Models\Question.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Staaworks.BankExpert.FuzzyExpert\Staaworks.BankExpert.FuzzyExpert.csproj">
+      <Project>{8332BD55-E462-4DC6-B7F6-07F2EC5DB812}</Project>
+      <Name>Staaworks.BankExpert.FuzzyExpert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Staaworks.BankExpert.Shared\Staaworks.BankExpert.Shared.csproj">
+      <Project>{EEC5C3DA-4025-4B3C-A606-17BD34E75F69}</Project>
+      <Name>Staaworks.BankExpert.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

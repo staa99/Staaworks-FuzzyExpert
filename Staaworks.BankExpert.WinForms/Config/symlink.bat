@@ -1,0 +1,1 @@
+mklink /J 'C:\Clients\Academic\PhD\Mr Tobi\Implementation\Staa Bank Expert\Staaworks.BankExpert.WinForms\bin\Debug\Config' 'C:\Clients\Academic\PhD\Mr Tobi\Implementation\Staa Bank Expert\Staaworks.BankExpert.WinForms\Config'

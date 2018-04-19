@@ -48,9 +48,12 @@ namespace Staaworks.BankExpert.WinForms
 
 
 
-        public void LoadNextQuestion()
+        public void LoadNextQuestion ()
         {
-            QuestionView.SetCurrentQuestion(Questions.First(p => p.Value == null).Key, Questions.Count(p => p.Value == null) <= 1);
+            if (Questions.Any (p => p.Value == null && p.Key.Source == "user"))
+            {
+                QuestionView.SetCurrentQuestion (Questions.First (p => p.Value == null && p.Key.Source == "user").Key, Questions.Count (p => p.Value == null) <= 1);
+            }
         }
     }
 }

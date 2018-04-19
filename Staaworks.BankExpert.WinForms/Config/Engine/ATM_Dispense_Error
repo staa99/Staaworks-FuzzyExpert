@@ -1,0 +1,201 @@
+﻿// Amount debitted and balance
+{
+	set VeryLow = [500, 5000, edge: right]
+}
+{
+	set Low = [500, 5000, 10000, 20000]
+}
+{
+	set LittleLow = [10000, 20000, 30000, 50000]
+}
+{
+	set Normal = [30000, 50000, 100000, 300000]
+}
+{
+	set LittleHigh = [100000, 300000, 500000, 800000]
+}
+
+{
+	set High = [500000, 800000, 1000000, 10000000]
+}
+
+{
+	set VeryHigh = [1000000, 10000000, edge: left]
+}
+
+// Bank of transaction
+{
+	set MyBank = [0, 1, edge: right]
+}
+
+{
+	set OtherBank = [1, 2, edge: left]
+}
+
+// Difference between now and time of transaction in hours
+{
+	set VeryRecent = [1, 3, edge: right]
+}
+
+{
+	set Recent = [1, 3, 9, 12]
+}
+
+{
+	set SomeHoursAgo = [9, 12, 18, 24]
+}
+
+{
+	set FewDaysAgo = [18, 24, 48, 72]
+}
+
+{
+	set LessThanAWeekAgo =  [48, 72, 144, 168]
+}
+
+{
+	set SomeWeeksAgo = [144, 168, 336, 504]
+}
+
+{
+	set ALongTimeAgo = [504, 1000, 2000, 2500]
+}
+
+{
+	set AVeryLongTimeAgo = [1000, 100000, edge: left]
+}
+
+
+// Decision
+{
+	set Wait = [15, 40, edge: right]
+}
+
+{
+	set VisitBranch = [0, 40, 60, 100]
+}
+
+{
+	set CheckBalance = [60, 100, edge: left]
+}
+
+
+
+
+
+
+{
+	var TransactionDate =	min: 1
+							max: 100000
+							labels: [VeryRecent, Recent, SomeHoursAgo,
+									FewDaysAgo, LessThanAWeekAgo, SomeWeeksAgo,
+									ALongTimeAgo, AVeryLongTimeAgo]
+
+							text: "How long ago (in hours) did you withdraw, Note that you must wait for at least one hour before complaining?"
+							options:
+							[
+								option1:[type: fixed, text: "Recently", value: 3],
+								option2:[type: fixed, text: "A few days ago", value: 48],
+								option3:[type: fixed, text: "Less than a week ago", value: 144],
+								option5:[type: fixed, text: "A few weeks ago", value: 500],
+								option6:[type: fixed, text: "A long time ago", value: 2000],
+								option4:[type: freetext, text: "Specific Value", value: 0]
+							]
+}
+
+{
+	var AmountDebitted =	min: 500
+							max: 10000000
+							labels: [VeryLow, Low, LittleLow, Normal, LittleHigh, High, VeryHigh]
+							text: "How much did you withdraw altogether?"
+							options:
+							[
+								option1:[type: freetext, text: "The specific amount", value: 0]
+							]
+}
+
+{
+	var BalanceBefore =		min: 0
+							max: 1000000000
+							labels: [VeryLow, Low, LittleLow, Normal, LittleHigh, High, VeryHigh]
+							text: "How much was your balance before the withdrawal?"
+							options:
+							[
+								option1:[type: freetext, text: "The specific amount", value: 0]
+							]
+}
+
+{
+	var BankUsed =			min: 0
+							max: 2
+							labels: [MyBank, OtherBank]
+							text: "Where did you make the withdrawal?"
+							options:
+							[
+								option1:[type: fixed, text: "Our bank", value: 0.5],
+								option2:[type: fixed, text: "Another bank", value: 1.5]
+							]
+}
+
+
+{
+	var BalanceAfter =		min: 0
+							max: 1000000000
+							labels: [VeryLow, Low, LittleLow, Normal, LittleHigh, High, VeryHigh]
+							text: "How much was your balance after the withdrawal?"
+							source: user.balanceAfter
+}
+
+
+
+{
+	var Advice =			min: 0
+							max: 120
+							labels: [Wait, VisitBranch, CheckBalance]
+							outputDefinitions:
+							[
+								d1: [text: "Please wait a little longer, it might have been queued for correction", value: 15, isContext: false],
+								d2: [text: "Please visit our nearest branch for immediate action", value: 40, isContext: false],
+								d3: [text: "Please recheck your account", value: 60, isContext: false]
+							]
+}
+
+{
+	rule WaitIfRecent =		clause: "IF TransactionDate IS VeryRecent THEN Advice IS Wait"
+}
+
+{
+	rule TooLongAgoVisitBranch = clause: "IF TransactionDate IS AVeryLongTimeAgo THEN Advice IS VisitBranch"
+}
+
+{
+	rule AmountDebittedTooMuch = clause: "IF AmountDebitted IS Low THEN Advice IS Wait"
+}
+
+{
+	rule BankUsedNotOurs = clause: "IF BankUsed IS OtherBank THEN Advice IS Wait"
+}
+
+{
+	rule BalanceNotInSameRange = clause: "IF BalanceBefore IS High AND AmountDebitted IS High AND BalanceAfter IS High THEN Advice IS CheckBalance"
+}
+
+{
+	rule BalanceNotInSameRange2 = clause: "IF BalanceBefore IS Normal AND AmountDebitted IS High THEN Advice IS CheckBalance"
+}
+
+{
+	rule BalanceNotInSameRange3 = clause: "IF BalanceBefore IS Normal AND AmountDebitted IS Normal AND BalanceAfter IS High THEN Advice IS CheckBalance"
+}
+
+{
+	rule BalanceNotInSameRange4 = clause: "IF BalanceBefore IS Normal AND AmountDebitted IS Normal AND BalanceAfter IS Normal THEN Advice IS CheckBalance"
+}
+
+{
+	rule BalanceInNormalRange = clause: "IF BalanceBefore IS High AND AmountDebitted IS High AND BalanceAfter IS LittleHigh THEN Advice IS VisitBranch"
+}
+
+{
+	rule BalanceInNormalRange2 = clause: "IF BalanceBefore IS LittleHigh AND AmountDebitted IS High AND BalanceAfter IS VeryLow THEN Advice IS VisitBranch"
+}
