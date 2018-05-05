@@ -77,6 +77,7 @@
       <DependentUpon>QuestionView.cs</DependentUpon>
     </Compile>
     <Compile Include="Registration\UserCreatorData.cs" />
+    <Compile Include="Registration\UserCreatorFaceData.cs" />
     <Compile Include="Registration\UserCreatorFingerprintData.cs" />
     <Compile Include="Registration\UserCreator_BasicForm.cs">
       <SubType>UserControl</SubType>
@@ -131,12 +132,25 @@
       <Project>{3af007f1-b6fd-4853-a441-5aac72ed3078}</Project>
       <Name>Staaworks.BankExpert.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Staaworks.BankExpert.FaceRecognition\Staaworks.BankExpert.FaceRecognition.csproj">
+      <Project>{9A2F8552-60D2-4BD8-BEB8-98375B4EDCEA}</Project>
+      <Name>Staaworks.BankExpert.FaceRecognition</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Staaworks.BankExpert.Shared\Staaworks.BankExpert.Shared.csproj">
       <Project>{eec5c3da-4025-4b3c-a606-17bd34e75f69}</Project>
       <Name>Staaworks.BankExpert.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\Face\TrainedFaces\face1.bmp" />
+    <Content Include="Config\Face\TrainedFaces\face2.bmp" />
+    <Content Include="Config\Face\TrainedFaces\face3.bmp" />
+    <Content Include="Config\Face\TrainedFaces\face4.bmp" />
+    <Content Include="Config\Face\TrainedFaces\face5.bmp" />
+    <Content Include="Config\Face\TrainedFaces\face6.bmp" />
+    <Content Include="Config\Face\TrainedFaces\face7.bmp" />
+    <Content Include="Config\Face\TrainedFaces\face8.bmp" />
+    <Content Include="Config\Face\TrainedLabels.txt" />
     <None Include="Config\Engine\ATM_Dispense_Error" />
     <Content Include="Config\Engine\Readme.txt" />
   </ItemGroup>

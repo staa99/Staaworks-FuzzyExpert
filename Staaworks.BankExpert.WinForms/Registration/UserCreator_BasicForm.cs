@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 
 namespace Staaworks.BankExpert.WinForms.Registration
 {
-    public partial class UserCreator_BasicForm : UserControl
+    partial class UserCreator_BasicForm : UserControl
     {
         public UserCreatorData CreatorData { get; set; }
         private bool basicAuthDone = false,
@@ -34,7 +34,7 @@ namespace Staaworks.BankExpert.WinForms.Registration
             {
                 basicAuthDone = true;
 
-                if (basicAuthDone && fingerprintRegDone/* && faceCaptureDone*/)
+                if (basicAuthDone && fingerprintRegDone && faceCaptureDone)
                 {
                     var userSaved = false;
                     try
@@ -56,31 +56,31 @@ namespace Staaworks.BankExpert.WinForms.Registration
                         MessageBox.Show(ex.Message, "Error");
                     }
 
-                    bool fingerprintSaved = false;
+                    var fingerprintSaved = false;
                     if (userSaved)
                     {
                         try
                         {
-                            Dictionary<int, string> Fmds = new Dictionary<int, string>();
-                            Dictionary<int, List<string>> Fids = new Dictionary<int, List<string>>();
-                            foreach (int finger in CreatorData.BioRegData.FingerprintData.MainObject.Fmds.Keys)
+                            var Fmds = new Dictionary<int, string>();
+                            var Fids = new Dictionary<int, List<string>>();
+                            foreach (var finger in CreatorData.FingerprintData.MainObject.Fmds.Keys)
                             {
-                                Fmds.Add(finger, Fmd.SerializeXml(CreatorData.BioRegData.FingerprintData.MainObject.Fmds[finger]));
+                                Fmds.Add(finger, Fmd.SerializeXml(CreatorData.FingerprintData.MainObject.Fmds[finger]));
                                 //MessageBox.Show("extracted fmd :" + Fmd.SerializeXml(CreatorData.FingerprintData.MainObject.Fmds[finger]), "Alert");
-                                List<string> fids = new List<string>();
-                                foreach (Fid fid in CreatorData.BioRegData.FingerprintData.MainObject.Fids[finger])
+                                var fids = new List<string>();
+                                foreach (var fid in CreatorData.FingerprintData.MainObject.Fids[finger])
                                 {
                                     fids.Add(Fid.SerializeXml(fid));
                                     //   MessageBox.Show("extracted fid :"+Fid.SerializeXml(fd), "Alert");
                                 }
                                 Fids.Add(finger, fids);
                             }
-                            bool b = UserRepository.SaveFingerPrint(Fmds, Fids, CreatorData.User.Email, null);
+                            var b = UserRepository.SaveFingerPrint(Fmds, Fids, CreatorData.User.Email, null);
                             if (b)
                             {
                                 fingerprintSaved = true;
-                                CreatorData.BioRegData.FingerprintData.MainObject.Fids.Clear();
-                                CreatorData.BioRegData.FingerprintData.MainObject.Fmds.Clear();
+                                CreatorData.FingerprintData.MainObject.Fids.Clear();
+                                CreatorData.FingerprintData.MainObject.Fmds.Clear();
                                 bio_altered = false; MessageBox.Show("FingerPrint Saved Successully", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             else
@@ -130,7 +130,7 @@ namespace Staaworks.BankExpert.WinForms.Registration
                 return false;
             }
 
-            System.Net.Mail.MailAddress mail = new System.Net.Mail.MailAddress(EmailTextBox.Text);
+            var mail = new System.Net.Mail.MailAddress(EmailTextBox.Text);
             if (!Regex.IsMatch(EmailTextBox.Text, "^[\\w.-]+@(?=[a-z\\d][^.]*\\.)[a-z\\d.-]*(?<![.-])$"))
             {
                 return false;
@@ -144,32 +144,36 @@ namespace Staaworks.BankExpert.WinForms.Registration
         private void GoToFingerprintEnrollment()
         {
             //TODO: Load the Enrollment Form
-            if (CreatorData.BioRegData.FingerprintData.ReaderSelectionForm == null)
+            if (CreatorData.FingerprintData.ReaderSelectionForm == null)
             {
-                CreatorData.BioRegData.FingerprintData.ReaderSelectionForm = new ReaderSelection
+                CreatorData.FingerprintData.ReaderSelectionForm = new ReaderSelection
                 {
                     // CreatorData.FingerprintData.ReaderSelectionForm.Sender = this;
-                    Currentinstance = CreatorData.BioRegData.FingerprintData.MainObject
+                    Currentinstance = CreatorData.FingerprintData.MainObject
                 };
             }
 
-            CreatorData.BioRegData.FingerprintData.ReaderSelectionForm.ShowDialog();
+            CreatorData.FingerprintData.ReaderSelectionForm.ShowDialog();
 
-            if (CreatorData.BioRegData.FingerprintData.EnrollmentControl == null)
+            if (CreatorData.FingerprintData.EnrollmentControl == null)
             {
-                CreatorData.BioRegData.FingerprintData.EnrollmentControl = new EnrollmentControl();
-                CreatorData.BioRegData.FingerprintData.EnrollmentControl.SCevent += SaveFingerprint;
-                CreatorData.BioRegData.FingerprintData.EnrollmentControl.Currentinstance = CreatorData.BioRegData.FingerprintData.MainObject; // this;
+                CreatorData.FingerprintData.EnrollmentControl = new EnrollmentControl();
+                CreatorData.FingerprintData.EnrollmentControl.SCevent += SaveFingerprint;
+                CreatorData.FingerprintData.EnrollmentControl.Currentinstance = CreatorData.FingerprintData.MainObject; // this;
 
             }
             bio_altered = true;
-            CreatorData.BioRegData.FingerprintData.EnrollmentControl.ShowDialog();
+            CreatorData.FingerprintData.EnrollmentControl.ShowDialog();
         }
 
 
         private static BitmapImage LoadImage(byte[] imageData)
         {
-            if (imageData == null || imageData.Length == 0) return null;
+            if (imageData == null || imageData.Length == 0)
+            {
+                return null;
+            }
+
             var image = new BitmapImage();
             using (var mem = new MemoryStream(imageData))
             {
@@ -185,39 +189,16 @@ namespace Staaworks.BankExpert.WinForms.Registration
             return image;
         }
 
-        //private void SavePicture()
-        //{
-        //    try
-        //    {
-        //        BitmapImage bi = (BitmapImage)imgboxCapture.Source;
-        //        Image img = new Bitmap(bi.StreamSource);
-        //        byte[] bb = ImageToByte2(img);
-        //        UserRepository repo = new UserRepository();
-        //        bool b = repo.savePersonPic(bb, pvm.PersonId, null);
-        //        if (b) { pic_altered = false; MessageBox.Show("Picture Saved Successully", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information); }
-        //        else
-        //        {
-        //            MessageBox.Show("Error Saving Picture", "Alert");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Error Saving Picture?", "Alert");
-        //    }
-        //}
 
-
-        private void SaveFingerprint()
-        {
-            fingerprintRegDone = true;
-        }
+        private void SaveFingerprint () => fingerprintRegDone = true;
 
 
         public byte[] ImageToByte(System.Drawing.Image img)
         {
-            ImageConverter converter = new ImageConverter();
+            var converter = new ImageConverter();
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
         }
+
 
         public byte[] ImageToByte2(System.Drawing.Image img)
         {
@@ -228,28 +209,59 @@ namespace Staaworks.BankExpert.WinForms.Registration
             }
         }
 
+
         private void EnrollFingerButton_Click (object sender, EventArgs e) => GoToFingerprintEnrollment();
 
-        public Byte[] BufferFromImage(BitmapImage imageSource)
+
+        private void FaceRegButton_Click (object sender, EventArgs e)
         {
-            Stream stream = imageSource.StreamSource;
-            Byte[] buffer = null;
+            var email = EmailTextBox.Text;
+            if (string.IsNullOrWhiteSpace(email) || !Regex.IsMatch(email, "^[\\w.-]+@(?=[a-z\\d][^.]*\\.)[a-z\\d.-]*(?<![.-])$"))
+            {
+                Console.Beep();
+                return;
+            }
+
+            CreatorData.FaceData.RecognitionSchemeData.Email = email;
+            CreatorData.FaceData.RecognitionForm.OnComplete = () =>
+            {
+                if (CreatorData.FaceData.RecognitionSchemeData.Successful)
+                {
+                    faceCaptureDone = true;
+                    CreatorData.FaceData.RecognitionSchemeData = null;
+                    CreatorData.FaceData.RecognitionForm.Close();
+                }
+                else
+                {
+                    Console.Beep();
+                }
+            };
+
+            CreatorData.FaceData.RecognitionForm.ShowDialog();
+        }
+
+
+        public byte[] BufferFromImage(BitmapImage imageSource)
+        {
+            var stream = imageSource.StreamSource;
+            byte[] buffer = null;
             if (stream != null && stream.Length > 0)
             {
-                using (BinaryReader br = new BinaryReader(stream))
+                using (var br = new BinaryReader(stream))
                 {
-                    buffer = br.ReadBytes((Int32)stream.Length);
+                    buffer = br.ReadBytes((int) stream.Length);
                 }
             }
 
             return buffer;
         }
 
+
         public static byte[] ImageToBytes(BitmapImage img)
         {
-            using (MemoryStream ms = new MemoryStream())
+            using (var ms = new MemoryStream())
             {
-                WriteableBitmap btmMap = new WriteableBitmap(img);
+                var btmMap = new WriteableBitmap(img);
 
                 //  System.Windows.Media.Imaging.Extensions.SaveJpeg(btmMap, ms, img.PixelWidth, img.PixelHeight, 0, 100);
                 img = null;
@@ -257,33 +269,36 @@ namespace Staaworks.BankExpert.WinForms.Registration
             }
         }
 
+
         private void VerifyFingerprint(object sender, EventArgs e)
         {
             Verification verificationForm = null;
-            if (CreatorData.BioRegData.FingerprintData.ReaderSelectionForm == null)
+            if (CreatorData.FingerprintData.ReaderSelectionForm == null)
             {
-                CreatorData.BioRegData.FingerprintData.ReaderSelectionForm = new ReaderSelection();
-                // CreatorData.FingerprintData.ReaderSelectionForm.Sender = this;
-                CreatorData.BioRegData.FingerprintData.ReaderSelectionForm.Currentinstance = CreatorData.BioRegData.FingerprintData.MainObject;
+                CreatorData.FingerprintData.ReaderSelectionForm = new ReaderSelection
+                {
+                    // CreatorData.FingerprintData.ReaderSelectionForm.Sender = this;
+                    Currentinstance = CreatorData.FingerprintData.MainObject
+                };
             }
 
-            CreatorData.BioRegData.FingerprintData.ReaderSelectionForm.ShowDialog();
+            CreatorData.FingerprintData.ReaderSelectionForm.ShowDialog();
 
             if (verificationForm == null)
             {
                 verificationForm = new Verification
                 {
-                    Currentinstance = CreatorData.BioRegData.FingerprintData.MainObject // this;
+                    Currentinstance = CreatorData.FingerprintData.MainObject // this;
                 };
             }
 
             var strFmds = CreatorData.User?.Snapshots?.SelectMany(s => s.Fingerprints)?.Select(s => s.Fmd);
             if (strFmds != null && strFmds.Any())
             {
-                List<Fmd> fmds = new List<Fmd>();
+                var fmds = new List<Fmd>();
                 foreach (var strFmd in strFmds)
                 {
-                    Fmd fmd = Fmd.DeserializeXml(strFmd);
+                    var fmd = Fmd.DeserializeXml(strFmd);
                     fmds.Add(fmd);
                 }
                 verificationForm.database = fmds;

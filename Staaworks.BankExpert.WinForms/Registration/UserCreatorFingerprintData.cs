@@ -4,7 +4,7 @@ using Staaworks.BankExpert.Shared.Models;
 
 namespace Staaworks.BankExpert.WinForms.Registration
 {
-    public class UserCreatorFingerprintData
+    class UserCreatorFingerprintData
     {
         public MainObject MainObject { get; set; }
         public EnrollmentControl EnrollmentControl { get; set; }

@@ -225,6 +225,7 @@
             this.FaceRegButton.TabIndex = 14;
             this.FaceRegButton.Text = "Register Face";
             this.FaceRegButton.UseVisualStyleBackColor = true;
+            this.FaceRegButton.Click += new System.EventHandler(this.FaceRegButton_Click);
             // 
             // RegButton
             // 

@@ -1,27 +1,32 @@
 ﻿using System.Windows.Forms;
+using FIngerCapturing.Common;
+using Staaworks.BankExpert.Shared.Interfaces;
 using Staaworks.BankExpert.Shared.Models;
 using Staaworks.BankExpert.WinForms.Interfaces;
 
 namespace Staaworks.BankExpert.WinForms.Registration
 {
-    public class UserCreatorData : IViewDataHolder
+    class UserCreatorData : IViewDataHolder
     {
         public IDataReciever Reciever { get; }
         public UserCreatorData(IDataReciever reciever)
         {
-            int a = 1000000000;
             Reciever = reciever;
-            BioRegData = new BioRegData
+            FingerprintData = new UserCreatorFingerprintData
             {
-                FingerprintData = new UserCreatorFingerprintData
-                {
-                    MainObject = new FIngerCapturing.Common.MainObject()
-                }
+                MainObject = new MainObject()
             };
+            FaceData = new UserCreatorFaceData
+            {
+                RecognitionSchemeData = new RecognitionSchemeData()
+            };
+
+            FaceData.RecognitionForm = new FaceRecognition.RecognitionForm(5, (FaceRecognitionSchemes.RegistrationScheme, FaceData.RecognitionSchemeData));
         }
 
         public User User { get; set; }
-        public BioRegData BioRegData { get; set; }
+        public UserCreatorFingerprintData FingerprintData { get; set; }
+        public UserCreatorFaceData FaceData { get; set; }
         public UserCreator_BasicForm CreatorForm { get; set; }
         public Control ViewDataControl { get => CreatorForm; set => CreatorForm = value as UserCreator_BasicForm; }
 
@@ -33,11 +38,5 @@ namespace Staaworks.BankExpert.WinForms.Registration
             };
             Reciever.AddControl(CreatorForm);
         }
-    }
-
-
-    public class BioRegData
-    {
-        public UserCreatorFingerprintData FingerprintData { get; set; }
     }
 }

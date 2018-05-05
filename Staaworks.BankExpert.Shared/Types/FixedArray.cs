@@ -9,6 +9,7 @@ namespace Staaworks.BankExpert.Shared.Types
         private readonly int _maxLength;
         private int index = 0;
         private readonly T tnull;
+        public int Length { get; set; }
 
         public FixedArray(int length, T tnull)
         {
@@ -28,7 +29,11 @@ namespace Staaworks.BankExpert.Shared.Types
                 IndexToOldest();
                 array[index] = el;
             }
+            Length++;
         }
+
+
+        public bool IsFull => Length == _maxLength;
 
 
         private void IndexToOldest()
@@ -64,7 +69,7 @@ namespace Staaworks.BankExpert.Shared.Types
         public T GetMostPopularLabel()
         {
             // select pairs of label and counts from the array
-            var groups = array.Where(e => !e.Equals(tnull)).GroupBy(e => e).Select(g => (label: g.Key, popularity: g.Count())).OrderBy(p => p.popularity).ToArray();
+            var groups = array.Where(e => e != null && !e.Equals(tnull)).GroupBy(e => e).Select(g => (label: g.Key, popularity: g.Count())).OrderBy(p => p.popularity).ToArray();
 
             if (groups.Length == 0)
             {

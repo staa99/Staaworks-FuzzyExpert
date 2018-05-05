@@ -30,7 +30,7 @@ namespace Staaworks.BankExpert.WinForms
             };
 
             InitializeComponent();
-            LoadTask("QuestionAndAnswer");
+            LoadTask("Registration");
         }
 
 
