@@ -24,9 +24,7 @@ namespace Staaworks.BankExpert.Data.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             var userModelBuilder = modelBuilder.Entity<UserEntity>();
-            userModelBuilder.ToTable("Users")
-                            .HasKey(u => u.Id)
-                            .Property(u => u.Name).HasMaxLength(255)
+            userModelBuilder.Property(u => u.Name).HasMaxLength(255)
                                                   .IsRequired();
 
             userModelBuilder.Property(u => u.Email).IsRequired()
@@ -38,8 +36,8 @@ namespace Staaworks.BankExpert.Data.Models
             userModelBuilder.Property(u => u.Phone).HasMaxLength(50).IsOptional();
             userModelBuilder.Property(u => u.ZipOrPostalAddress).HasMaxLength(50).IsOptional();
             userModelBuilder.HasMany(u => u.Snapshots).WithRequired(s => s.Owner);
-            userModelBuilder.HasMany(u => u.SnapshotsCreated).WithRequired(s => s.CreatedBy);
-            userModelBuilder.HasMany(u => u.SnapshotsEdited).WithOptional(s => s.LastModifiedBy);
+            userModelBuilder.HasMany(u => u.SnapshotsCreated).WithRequired(s => s.CreatedBy).WillCascadeOnDelete(false);
+            userModelBuilder.HasMany(u => u.SnapshotsEdited).WithOptional(s => s.LastModifiedBy).WillCascadeOnDelete(false);
 
             userModelBuilder
                 .Map(m =>
@@ -93,9 +91,9 @@ namespace Staaworks.BankExpert.Data.Models
             fingerprintModelBuilder.ToTable("Fingerprints")
                                    .HasKey(f => f.Id)
                                    .Property(f => f.SnapshotId).IsRequired();
-            fingerprintModelBuilder.Property(f => f.Fid1).HasMaxLength(1023);
-            fingerprintModelBuilder.Property(f => f.Fid2).HasMaxLength(1023);
-            fingerprintModelBuilder.Property(f => f.Fmd).HasMaxLength(1023);
+            fingerprintModelBuilder.Property(f => f.Fid1).HasColumnType("nvarchar(max)");
+            fingerprintModelBuilder.Property(f => f.Fid2).HasColumnType("nvarchar(max)");
+            fingerprintModelBuilder.Property(f => f.Fmd).HasColumnType("nvarchar(max)");
         }
 
 

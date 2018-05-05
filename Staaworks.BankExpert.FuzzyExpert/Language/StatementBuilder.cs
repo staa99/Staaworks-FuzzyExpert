@@ -671,10 +671,7 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language
                 return key >= 0 && key <= index;
             }
 
-            public bool HasKey(string key)
-            {
-                return Dic.ContainsKey(key);
-            }
+            public bool HasKey (string key) => Dic.ContainsKey (key);
             public IEnumerable<KeyValuePair<string, Token>> TokenPairs => Dic;
 
 

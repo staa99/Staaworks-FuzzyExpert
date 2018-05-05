@@ -18,11 +18,6 @@ namespace FingerCapturing
         public delegate void saveandclose();
         public event saveandclose SCevent;
         public MainObject Currentinstance { get; set; }
-        /*public Form_Main Sender
-        {
-            get { return _sender; }
-            set { _sender = value; }
-        }*/
 
         public EnrollmentControl()
         {
@@ -41,9 +36,6 @@ namespace FingerCapturing
             }
 
             btnCancel.Enabled = false;
-            Currentinstance.Fids.Clear();
-            Currentinstance.Fmds.Clear();
-           // btnClose.Enabled = false;
         }
 
         private void enrollment_OnCaptured(DPCtlUruNet.EnrollmentControl enrollmentControl, CaptureResult captureResult, int fingerPosition)

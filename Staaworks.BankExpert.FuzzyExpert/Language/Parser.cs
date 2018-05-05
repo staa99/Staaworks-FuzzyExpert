@@ -19,39 +19,41 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language
 
 
             var node = lines.First;
-            int index = 1;
+            var index = 1;
             while (node != null)
             {
                 var line = node.Value;
-                var declaration = StatementBuilder.Parse(node, ref context, lineNumber: index);
+                var (fs, var, rule, type) = StatementBuilder.Parse(node, ref context, lineNumber: index);
 
 
-                switch (declaration.type)
+                switch (type)
                 {
                     case DefinitionType.Variable:
-                        if (vars.Any(d => d.Identifier == declaration.var.Identifier))
+                        if (vars.Any(d => d.Identifier == var.Identifier))
                         {
                             throw new InterpretationException("Duplicate identifiers found", index);
                         }
-                        vars.Add(declaration.var);
+                        vars.Add(var);
                         break;
 
                     case DefinitionType.FuzzySet:
-                        if (fsets.Any(d => d.Identifier == declaration.fs.Identifier))
+                        if (fsets.Any(d => d.Identifier == fs.Identifier))
                         {
                             throw new InterpretationException("Duplicate identifiers found", index);
                         }
-                        fsets.Add(declaration.fs);
+                        fsets.Add(fs);
                         break;
 
                     case DefinitionType.Rule:
-                        if (rules.Any(d => d.Identifier == declaration.rule.Identifier))
+                        if (rules.Any(d => d.Identifier == rule.Identifier))
                         {
                             throw new InterpretationException("Duplicate identifiers found", index);
                         }
-                        rules.Add(declaration.rule);
+                        rules.Add(rule);
                         break;
                 }
+
+                index++;
                 node = node.Next;
             }
 

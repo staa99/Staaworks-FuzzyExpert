@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cache\SystemGeneratedSourceCache.cs" />
+    <Compile Include="Interfaces\IImageRecognitionReceptor.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\Option.cs" />
     <Compile Include="Models\Output.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\FixedArray.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -21,6 +21,7 @@ namespace Staaworks.BankExpert.Core.Repositories
 
         public static User CreateUser(User user)
         {
+            CheckToInit();
             var dbUser = UserEntity.CreateFromUser(user);
             Entities.Users.Add(dbUser);
             Entities.SaveChanges();

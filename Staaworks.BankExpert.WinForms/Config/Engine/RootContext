@@ -42,10 +42,7 @@
 						max: 120;
 						labels: [Near, Medium, Far];
 						text: "How far is the nearest obstacle to the right of the car?";
-						// source can be one of (user | actual source)
-						// when source is not user, actual system source must be provided
 						source: user
-						// source: user.car.frontalDistance
 						options:[
 									option1:[type: fixed, text: "Near", value: 32.5],
 									option2:[type: fixed, text: "Average", value: 42.5],
@@ -61,10 +58,7 @@
 						max: 120;
 						labels: [Near, Medium, Far];
 						text: "How far is the nearest obstacle to the left of the car?";
-						// source can be one of (user | actual source)
-						// when source is not user, actual system source must be provided
 						source: user
-						// source: user.car.frontalDistance
 						options:[
 									option1:[type: fixed, text: "Near", value: 32.5],
 									option2:[type: fixed, text: "Average", value: 42.5],
@@ -80,13 +74,8 @@
 							max: 120;
 							labels: [Near, Medium, Far];
 							text: "How far is the nearest obstacle to the front of the car?";
-							// source can be one of (user | actual source)
-							// when source is not user, actual system source must be provided
 							source: user
-							// source: user.car.frontalDistance
 							options:[
-							// type can be one of (fixed | freetext). default fixed
-							// There can be AT MOST one freetext option
 										option1:[type: fixed, text: "Near", value: 32.5],
 										option2:[type: fixed, text: "Average", value: 42.5],
 										option3:[type: fixed, text: "Far", value: 80],

@@ -34,9 +34,9 @@ namespace Staaworks.BankExpert.WinForms.Registration
             {
                 basicAuthDone = true;
 
-                if (basicAuthDone && fingerprintRegDone && faceCaptureDone)
+                if (basicAuthDone && fingerprintRegDone/* && faceCaptureDone*/)
                 {
-                    bool userSaved = false;
+                    var userSaved = false;
                     try
                     {
                         CreatorData.User = UserRepository.CreateUser(new User
@@ -79,6 +79,8 @@ namespace Staaworks.BankExpert.WinForms.Registration
                             if (b)
                             {
                                 fingerprintSaved = true;
+                                CreatorData.BioRegData.FingerprintData.MainObject.Fids.Clear();
+                                CreatorData.BioRegData.FingerprintData.MainObject.Fmds.Clear();
                                 bio_altered = false; MessageBox.Show("FingerPrint Saved Successully", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             else
@@ -151,15 +153,12 @@ namespace Staaworks.BankExpert.WinForms.Registration
                 };
             }
 
-            CreatorData.BioRegData.FingerprintData.ReaderSelectionForm.ShowDialog(); ;
+            CreatorData.BioRegData.FingerprintData.ReaderSelectionForm.ShowDialog();
 
             if (CreatorData.BioRegData.FingerprintData.EnrollmentControl == null)
             {
                 CreatorData.BioRegData.FingerprintData.EnrollmentControl = new EnrollmentControl();
                 CreatorData.BioRegData.FingerprintData.EnrollmentControl.SCevent += SaveFingerprint;
-                // CreatorData.FingerprintData.EnrollmentControl.Sender = new MainObject(); // this;
-
-                // CreatorData.FingerprintData.MainObject.CurrentReader = CreatorData.FingerprintData.MainObject.CurrentReader;
                 CreatorData.BioRegData.FingerprintData.EnrollmentControl.Currentinstance = CreatorData.BioRegData.FingerprintData.MainObject; // this;
 
             }
@@ -229,10 +228,7 @@ namespace Staaworks.BankExpert.WinForms.Registration
             }
         }
 
-        private void EnrollFingerButton_Click(object sender, EventArgs e)
-        {
-            GoToFingerprintEnrollment();
-        }
+        private void EnrollFingerButton_Click (object sender, EventArgs e) => GoToFingerprintEnrollment();
 
         public Byte[] BufferFromImage(BitmapImage imageSource)
         {

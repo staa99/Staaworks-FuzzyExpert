@@ -27,9 +27,11 @@ namespace Staaworks.BankExpert.WinForms
         }
 
 
-        public void PopulateControl(params object[] parameters)
+        public void PopulateControl (params object[] parameters)
         {
-            var contextName = parameters.Any() ? parameters[0].ToString() : "RootContext";
+            var name = parameters.Any() ? parameters[0].ToString() : "RootContext";
+            var dotIndex = name.LastIndexOfAny(new char[]{'.'});
+            var contextName = parameters[0].ToString().Substring(0, dotIndex > 0? dotIndex: name.Length);
             QuestionView = new QuestionView(Reciever);
             CurrentContext = QuestionRepository.LoadContext(contextName);
             UpdateQuestionView();

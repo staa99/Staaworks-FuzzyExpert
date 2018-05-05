@@ -421,6 +421,12 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language.DeclarationFactories
             return function.Evaluate();
         }
 
+        public static string ToAndBack(string source)
+        {
+            OpTree tree = source;
+            return tree;
+        }
+
 
         private class OpTree
         {
@@ -492,12 +498,12 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language.DeclarationFactories
             {
                 raw = raw.Trim();
 
-                int parenthesisStartIndex = raw.IndexOf('(');
-                int parenthesisEndIndex = raw.LastIndexOf(')');
+                var parenthesisStartIndex = raw.IndexOf('(');
+                var parenthesisEndIndex = raw.LastIndexOf(')');
 
-                int commaIndex = -1;
-                int level = 0;
-                for (int i = parenthesisStartIndex + 2; i < parenthesisEndIndex; i++)
+                var commaIndex = -1;
+                var level = 0;
+                for (var i = parenthesisStartIndex + 2; i < parenthesisEndIndex; i++)
                 {
                     if (level == 0 && raw[i] == ',')
                     {
@@ -516,7 +522,7 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language.DeclarationFactories
 
                 if (parenthesisStartIndex > 0 && parenthesisEndIndex > parenthesisStartIndex)
                 {
-                    OpType type = commaIndex > parenthesisStartIndex ? OpType.binary : OpType.unary;
+                    var type = commaIndex > parenthesisStartIndex ? OpType.binary : OpType.unary;
                     string op;
                     OpTree op1, op2;
 
@@ -553,7 +559,7 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language.DeclarationFactories
                 }
                 else
                 {
-                    if (double.TryParse(raw, out double value))
+                    if (double.TryParse(raw, out var value))
                     {
                         SystemGeneratedSourceCache.Data[raw] = value;
                     }
@@ -569,6 +575,31 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language.DeclarationFactories
                         Operator = raw,
                         Type = OpType.value
                     };
+                }
+            }
+            public static implicit operator string (OpTree tree)
+            {
+                if (tree.Type != OpType.value)
+                {
+                    var output = "";
+
+                    output += tree.Operator;
+                    output += "(";
+                    output += tree.Operand1;
+
+                    if (tree.Type == OpType.binary)
+                    {
+                        output += ", ";
+                        output += tree.Operand2;
+                    }
+
+                    output += ")";
+
+                    return output;
+                }
+                else
+                {
+                    return tree.Operator;
                 }
             }
         }

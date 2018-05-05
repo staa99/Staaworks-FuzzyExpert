@@ -14,10 +14,8 @@ namespace Staaworks.BankExpert.FuzzyExpert.Engine
         public static  Context CurrentContext { get; set; }
         private static string Context { get; set; }
 
-        public static  void SetCurrentContextName(string name)
-        {
+        public static void SetCurrentContextName (string name) =>
             Context = name;
-        }
 
 
 

@@ -59,7 +59,8 @@ namespace Staaworks.BankExpert.WinForms
                 var radioButton = new RadioButton
                 {
                     Text = option.UserText,
-                    Name = option.Value.ToString()
+                    Name = option.Value.ToString(),
+                    AutoSize = true
                 };
 
 
