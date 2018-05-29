@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -20,8 +19,7 @@ namespace Staaworks.BankExpert.WinForms.Registration
         public UserCreatorData CreatorData { get; set; }
         private bool basicAuthDone = false,
                 fingerprintRegDone = false,
-                   faceCaptureDone = false,
-                       bio_altered = false;
+                   faceCaptureDone = false;
 
         public UserCreator_BasicForm()
         {
@@ -46,14 +44,35 @@ namespace Staaworks.BankExpert.WinForms.Registration
                             Phone = PhoneTextBox.Text,
                             Email = EmailTextBox.Text,
                             ZipOrPostalAddress = ZipOrPostalCodeTextBox.Text,
-                            HashSalt = Guid.NewGuid().ToString(),
-                            PasswordHash = BitConverter.ToString(SHA512.Create().ComputeHash(Encoding.UTF8.GetBytes(PasswordTextBox.Text)))
+                            HashSalt = Guid.NewGuid().ToString()
                         });
+
+                        CreatorData.User.PasswordHash = BitConverter.ToString(SHA512.Create().ComputeHash(Encoding.UTF8.GetBytes(PasswordTextBox.Text + CreatorData.User.HashSalt)));
                         userSaved = true;
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message, "Error");
+                        string addMessage (string message, Exception exception)
+                        {
+                            if (message == null)
+                            {
+                                message = string.Format("{0}\n", ex.Message);
+                            }
+                            else
+                            {
+                                message = string.Format("{0}\nCaused by {1}\n", message, ex.Message);
+                            }
+
+                            if (ex.InnerException != null)
+                            {
+                                return addMessage(message, ex.InnerException);
+                            }
+                            else
+                            {
+                                return message;
+                            }
+                        }
+                        MessageBox.Show(addMessage(null, ex), "Error");
                     }
 
                     var fingerprintSaved = false;
@@ -81,7 +100,6 @@ namespace Staaworks.BankExpert.WinForms.Registration
                                 fingerprintSaved = true;
                                 CreatorData.FingerprintData.MainObject.Fids.Clear();
                                 CreatorData.FingerprintData.MainObject.Fmds.Clear();
-                                bio_altered = false; MessageBox.Show("FingerPrint Saved Successully", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             else
                             {
@@ -125,17 +143,11 @@ namespace Staaworks.BankExpert.WinForms.Registration
                 AddressTextBox.Text == string.Empty ||
                 ZipOrPostalCodeTextBox.Text == string.Empty ||
                 PasswordTextBox.Text == string.Empty ||
-                PasswordTextBox.Text != ConfirmPasswordTextBox.Text)
+                PasswordTextBox.Text != ConfirmPasswordTextBox.Text ||
+                !Regex.IsMatch(EmailTextBox.Text, "^[\\w.-]+@(?=[a-z\\d][^.]*\\.)[a-z\\d.-]*(?<![.-])$"))
             {
                 return false;
             }
-
-            var mail = new System.Net.Mail.MailAddress(EmailTextBox.Text);
-            if (!Regex.IsMatch(EmailTextBox.Text, "^[\\w.-]+@(?=[a-z\\d][^.]*\\.)[a-z\\d.-]*(?<![.-])$"))
-            {
-                return false;
-            }
-
 
             return true;
         }
@@ -159,10 +171,8 @@ namespace Staaworks.BankExpert.WinForms.Registration
             {
                 CreatorData.FingerprintData.EnrollmentControl = new EnrollmentControl();
                 CreatorData.FingerprintData.EnrollmentControl.SCevent += SaveFingerprint;
-                CreatorData.FingerprintData.EnrollmentControl.Currentinstance = CreatorData.FingerprintData.MainObject; // this;
-
+                CreatorData.FingerprintData.EnrollmentControl.Currentinstance = CreatorData.FingerprintData.MainObject;
             }
-            bio_altered = true;
             CreatorData.FingerprintData.EnrollmentControl.ShowDialog();
         }
 
@@ -193,7 +203,7 @@ namespace Staaworks.BankExpert.WinForms.Registration
         private void SaveFingerprint () => fingerprintRegDone = true;
 
 
-        public byte[] ImageToByte(System.Drawing.Image img)
+        public byte[] ImageToByte(Image img)
         {
             var converter = new ImageConverter();
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
@@ -266,49 +276,6 @@ namespace Staaworks.BankExpert.WinForms.Registration
                 //  System.Windows.Media.Imaging.Extensions.SaveJpeg(btmMap, ms, img.PixelWidth, img.PixelHeight, 0, 100);
                 img = null;
                 return ms.ToArray();
-            }
-        }
-
-
-        private void VerifyFingerprint(object sender, EventArgs e)
-        {
-            Verification verificationForm = null;
-            if (CreatorData.FingerprintData.ReaderSelectionForm == null)
-            {
-                CreatorData.FingerprintData.ReaderSelectionForm = new ReaderSelection
-                {
-                    // CreatorData.FingerprintData.ReaderSelectionForm.Sender = this;
-                    Currentinstance = CreatorData.FingerprintData.MainObject
-                };
-            }
-
-            CreatorData.FingerprintData.ReaderSelectionForm.ShowDialog();
-
-            if (verificationForm == null)
-            {
-                verificationForm = new Verification
-                {
-                    Currentinstance = CreatorData.FingerprintData.MainObject // this;
-                };
-            }
-
-            var strFmds = CreatorData.User?.Snapshots?.SelectMany(s => s.Fingerprints)?.Select(s => s.Fmd);
-            if (strFmds != null && strFmds.Any())
-            {
-                var fmds = new List<Fmd>();
-                foreach (var strFmd in strFmds)
-                {
-                    var fmd = Fmd.DeserializeXml(strFmd);
-                    fmds.Add(fmd);
-                }
-                verificationForm.database = fmds;
-                // MessageBox.Show("Reader available:"+ (CreatorData.FingerprintData.MainObject.CurrentReader!=null).ToString());
-
-                verificationForm.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("No fingerprint found in database", "Alert");
             }
         }
     }

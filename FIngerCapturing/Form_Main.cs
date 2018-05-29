@@ -76,7 +76,7 @@ namespace FingerCapturing
         {
             if (_verification == null)
             {
-                _verification = new Verification();
+                //_verification = new Verification();
                // _verification.Sender = mobj;
             }
 

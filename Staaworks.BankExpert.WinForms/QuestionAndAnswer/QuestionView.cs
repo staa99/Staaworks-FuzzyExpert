@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Staaworks.BankExpert.WinForms
 {
-    public partial class QuestionView : UserControl
+    partial class QuestionView : UserControl
     {
         public Question CurrentQuestion { get; set; }
         private List<RadioButton> optionGroup = new List<RadioButton>();

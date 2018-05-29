@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{232D420C-8233-4BB2-A379-4D4BD1EFF0FD}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>Staaworks.BankExpert.WinForms</RootNamespace>
     <AssemblyName>Staaworks.BankExpert.WinForms</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
@@ -31,6 +31,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DPUruNet">
@@ -58,6 +61,20 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\AuthenticationData.cs" />
+    <Compile Include="Authentication\Forms\BasicAuthForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Authentication\Forms\BasicAuthForm.Designer.cs">
+      <DependentUpon>BasicAuthForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Authentication\UserAuthenticationScheme.cs" />
+    <Compile Include="Authentication\UserAuthenticator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Authentication\UserAuthenticator.Designer.cs">
+      <DependentUpon>UserAuthenticator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\IFingerprintCapturingReciever.cs" />
     <Compile Include="Interfaces\IQuestionOptionReciever.cs" />
     <Compile Include="Interfaces\IViewDataHolder.cs" />
@@ -85,6 +102,12 @@
     <Compile Include="Registration\UserCreator_BasicForm.Designer.cs">
       <DependentUpon>UserCreator_BasicForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Authentication\Forms\BasicAuthForm.resx">
+      <DependentUpon>BasicAuthForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Authentication\UserAuthenticator.resx">
+      <DependentUpon>UserAuthenticator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -144,12 +167,6 @@
   <ItemGroup>
     <Content Include="Config\Face\TrainedFaces\face1.bmp" />
     <Content Include="Config\Face\TrainedFaces\face2.bmp" />
-    <Content Include="Config\Face\TrainedFaces\face3.bmp" />
-    <Content Include="Config\Face\TrainedFaces\face4.bmp" />
-    <Content Include="Config\Face\TrainedFaces\face5.bmp" />
-    <Content Include="Config\Face\TrainedFaces\face6.bmp" />
-    <Content Include="Config\Face\TrainedFaces\face7.bmp" />
-    <Content Include="Config\Face\TrainedFaces\face8.bmp" />
     <Content Include="Config\Face\TrainedLabels.txt" />
     <None Include="Config\Engine\ATM_Dispense_Error" />
     <Content Include="Config\Engine\Readme.txt" />

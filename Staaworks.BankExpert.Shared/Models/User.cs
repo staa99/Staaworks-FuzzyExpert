@@ -25,6 +25,7 @@ namespace Staaworks.BankExpert.Shared.Models
         public virtual ICollection<Snapshot> Snapshots { get; set; }
         public virtual ICollection<Snapshot> SnapshotsCreated { get; set; }
         public virtual ICollection<Snapshot> SnapshotsEdited { get; set; }
+        public virtual ICollection<FingerprintLogs> FingerprintLogs { get; set; }
     }
 
 

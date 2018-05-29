@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System;
+using Staaworks.BankExpert.WinForms.Authentication;
 
 namespace Staaworks.BankExpert.WinForms
 {
-    public partial class MainWindow : Form, IQuestionOptionReciever
+    partial class MainWindow : Form, IQuestionOptionReciever
     {
         public IDictionary<string, Action> Tasks { get; }
         public Dictionary<string, IViewDataHolder> Data { get; }
@@ -20,7 +21,8 @@ namespace Staaworks.BankExpert.WinForms
             Data = new Dictionary<string, IViewDataHolder>
             {
                 ["QuestionAndAnswer"] = new QuestionAndAnswerViewDataHolder(this),
-                ["Registration"] = new UserCreatorData(this)
+                ["Registration"] = new UserCreatorData(this),
+                ["Authentication"] = new UserAuthenticator(this)
             };
 
             Tasks = new Dictionary<string, Action>
@@ -31,6 +33,7 @@ namespace Staaworks.BankExpert.WinForms
 
             InitializeComponent();
             LoadTask("Registration");
+            //LoadAuthenticationForm(UserAuthenticationScheme.BasicAuthentication, UserAuthenticationScheme.FaceAuthentication);
         }
 
 
@@ -46,6 +49,18 @@ namespace Staaworks.BankExpert.WinForms
         {
             ClearControls();
             (Data["Registration"] as UserCreatorData).PopulateControl();
+        }
+
+
+        public void LoadAuthenticationForm(params UserAuthenticationScheme[] schemes)
+        {
+            ClearControls();
+            var authenticator = Data["Authentication"] as UserAuthenticator;
+            authenticator.PopulateControl(schemes);
+            authenticator.OnComplete = (success) =>
+            {
+                MessageBox.Show(success.ToString());
+            };
         }
 
 

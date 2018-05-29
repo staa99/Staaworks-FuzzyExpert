@@ -198,6 +198,7 @@
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.Size = new System.Drawing.Size(150, 20);
             this.PasswordTextBox.TabIndex = 11;
+            this.PasswordTextBox.UseSystemPasswordChar = true;
             // 
             // ConfirmPasswordTextBox
             // 
@@ -206,6 +207,7 @@
             this.ConfirmPasswordTextBox.Name = "ConfirmPasswordTextBox";
             this.ConfirmPasswordTextBox.Size = new System.Drawing.Size(150, 20);
             this.ConfirmPasswordTextBox.TabIndex = 12;
+            this.ConfirmPasswordTextBox.UseSystemPasswordChar = true;
             // 
             // EnrollFingerButton
             // 

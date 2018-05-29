@@ -2,7 +2,7 @@
 
 namespace Staaworks.BankExpert.WinForms
 {
-    public interface IViewDataHolder
+    interface IViewDataHolder
     {
         Control ViewDataControl { get; set; }
         void PopulateControl(params object[] parameters);

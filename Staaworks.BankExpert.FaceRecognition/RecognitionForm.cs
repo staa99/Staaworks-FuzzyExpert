@@ -21,7 +21,9 @@ namespace Staaworks.BankExpert.FaceRecognition
         public Action OnComplete { set; get; }
         public string BaseDirectory { get; }
         public string TrainedFacesDirectory { get; }
+        private EventHandler Handler { get; set; }
 
+        private int errorCount = 0;
         Image<Bgr, byte> currentFrame;
         Capture grabber;
         HaarCascade face;
@@ -43,12 +45,21 @@ namespace Staaworks.BankExpert.FaceRecognition
             BaseDirectory = Application.StartupPath + "/Config/Face";
             TrainedFacesDirectory = BaseDirectory + "/TrainedFaces";
 
+            Handler = new EventHandler(FrameGrabber);
             Directory.CreateDirectory(BaseDirectory);
             Directory.CreateDirectory(TrainedFacesDirectory);
 
             Shown += (o, e) =>
             {
                 Initialize();
+            };
+
+            FormClosed += (o, e) =>
+            {
+                Application.Idle -= Handler;
+                face = null;
+                grabber.Dispose();
+                grabber = null;
             };
         }
 
@@ -77,7 +88,6 @@ namespace Staaworks.BankExpert.FaceRecognition
                     trainingImages.Add(new Image<Gray, byte>(TrainedFacesDirectory + "/" + LoadFaces));
                     labels.Add(Labels[tf]);
                 }
-                SchemeInfo.data.Successful = true;
             }
             catch
             {
@@ -85,7 +95,7 @@ namespace Staaworks.BankExpert.FaceRecognition
             }
 
             //Initialize the FrameGraber event
-            Application.Idle += new EventHandler(FrameGrabber);
+            Application.Idle += Handler;
 
 
             switch (SchemeInfo.scheme)
@@ -145,6 +155,8 @@ namespace Staaworks.BankExpert.FaceRecognition
             }
             catch
             {
+                FeedbackLabel.ForeColor = Color.DarkRed;
+                FeedbackLabel.Text = string.Format("Could not capture face. Trials: {0}", ++errorCount);
                 SchemeInfo.data.Successful = false;
             }
         }

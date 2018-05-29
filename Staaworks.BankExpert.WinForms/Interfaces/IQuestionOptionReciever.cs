@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Staaworks.BankExpert.WinForms.Interfaces
 {
-    public interface IDataReciever
+    interface IDataReciever
     {
         void AddControl(Control control);
         void RemoveControl(Control control);
@@ -13,7 +13,7 @@ namespace Staaworks.BankExpert.WinForms.Interfaces
     }
 
 
-    public interface IQuestionOptionReciever : IDataReciever
+    interface IQuestionOptionReciever : IDataReciever
     {
         void SetQuestionValue(Question question, Option option);
     }

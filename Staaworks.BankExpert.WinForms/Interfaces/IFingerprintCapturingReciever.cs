@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Staaworks.BankExpert.WinForms.Interfaces
 {
-    public interface IFingerprintCapturingReciever
+    interface IFingerprintCapturingReciever
     {
         Reader CurrentReader { get; set; }
 

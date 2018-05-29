@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using DPUruNet;
 using FIngerCapturing.Common;
 using System.Collections.Generic;
+using System;
 
 namespace FingerCapturing
 {
@@ -13,58 +14,43 @@ namespace FingerCapturing
         private bool reset = false;
 
         private Thread verifyThreadHandle;
-
-        //private Form_Main _sender;
-
-        //public Form_Main Sender
-        //{
-        //    get { return _sender; }
-        //    set { _sender = value; }
-        //}
-
-        private MainObject currentinstance;
-        public MainObject Currentinstance
-        {
-            get { return currentinstance; }
-            set { currentinstance = value; }
-        }
+        public string SuccessReading { get; private set; }
+        public MainObject Currentinstance { get; set; }
         public List<Fmd> database = new List<Fmd>();
-        public Verification()
+        private Action<bool> OnComplete { get; }
+        public Verification (Action<bool> onComplete)
         {
             InitializeComponent();
+            OnComplete = onComplete;
         }
 
         /// <summary>
         /// Open the reader and capture two fingers to compare.
         /// </summary>
-        private void VerifyThread()
+        private void VerifyThread ()
         {
-           
-           
-            Constants.ResultCode result = Constants.ResultCode.DP_DEVICE_FAILURE;
-            result = currentinstance.CurrentReader.Open(Constants.CapturePriority.DP_PRIORITY_COOPERATIVE);
+            var result = Constants.ResultCode.DP_DEVICE_FAILURE;
+            result = Currentinstance.CurrentReader.Open(Constants.CapturePriority.DP_PRIORITY_COOPERATIVE);
             if (result != Constants.ResultCode.DP_SUCCESS)
             {
                 MessageBox.Show("Error:  " + result);
-                if (currentinstance.CurrentReader != null)
+                if (Currentinstance.CurrentReader != null)
                 {
-                    currentinstance.CurrentReader.Dispose();
-                    currentinstance.CurrentReader = null;
+                    Currentinstance.CurrentReader.Dispose();
+                    Currentinstance.CurrentReader = null;
                 }
                 return;
             }
-          
+
             Fmd fmd1 = null;
-          //  Fmd fmd2 = null;
+            //  Fmd fmd2 = null;
 
             SendMessage("Place a finger on the reader.");
-
-            int count = 0;
             while (!reset)
             {
                 Fid fid = null;
 
-                if (!currentinstance.CaptureFinger(ref fid))
+                if (!Currentinstance.CaptureFinger(ref fid))
                 {
                     break;
                 }
@@ -75,12 +61,12 @@ namespace FingerCapturing
                 }
 
                 SendMessage("A finger was captured.");
-                
-                DataResult<Fmd> resultConversion = FeatureExtraction.CreateFmdFromFid(fid, Constants.Formats.Fmd.ANSI);
+
+                var resultConversion = FeatureExtraction.CreateFmdFromFid(fid, Constants.Formats.Fmd.ANSI);
 
                 if (resultConversion.ResultCode != Constants.ResultCode.DP_SUCCESS)
                 {
-                    break; 
+                    break;
                 }
 
                 /* if (count == 0)
@@ -103,43 +89,60 @@ namespace FingerCapturing
                      SendMessage("Place a finger on the reader.");
                      count = 0;
                  }*/
+
                 fmd1 = resultConversion.Data;
-                bool pass_threshold = false;
-                foreach (Fmd fd  in database)
+                var pass_threshold = false;
+                foreach (var fd in database)
                 {
-                    CompareResult compareResult = Comparison.Compare(fmd1, 0, fd, 0);
+                    var compareResult = Comparison.Compare(fmd1, 0, fd, 0);
                     if (compareResult.ResultCode != Constants.ResultCode.DP_SUCCESS)
                     {
                         break;
                     }
-                     pass_threshold = compareResult.Score < (PROBABILITY_ONE / 100000);
+                    pass_threshold = compareResult.Score < (PROBABILITY_ONE / 100000);
                     SendMessage("Comparison resulted in a dissimilarity score of " + compareResult.Score.ToString() + (pass_threshold ? " (fingerprints matched)" : " (fingerprints did not match)"));
                     //SendMessage("Place a finger on the reader.");
                     if (pass_threshold)
                     {
-                        MessageBox.Show("Verification Successful","Success", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         break;
                     }
-                   
                 }
-                if (!pass_threshold)
+
+                if (Currentinstance.CurrentReader != null)
                 {
-                    MessageBox.Show("Verification Failed!!!", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Currentinstance.CurrentReader.Dispose();
+                    Currentinstance.CurrentReader = null;
                 }
+
+                FormClosed += (o, e) =>
+                {
+                    if (pass_threshold)
+                    {
+                        SuccessReading = Fmd.SerializeXml(fmd1);
+                    }
+
+                    OnComplete(pass_threshold);
+                };
+
+                Close();
+                
             }
 
-            if (currentinstance.CurrentReader != null)
-                currentinstance.CurrentReader.Dispose();
+            if (Currentinstance.CurrentReader != null)
+            {
+                Currentinstance.CurrentReader.Dispose();
+                Currentinstance.CurrentReader = null;
+            }
         }
 
-        private delegate void SendMessageCallback(string payload);
+        private delegate void SendMessageCallback (string payload);
 
-        private void SendMessage(string payload)
+        private void SendMessage (string payload)
         {
-            if (this.txtVerify.InvokeRequired)
+            if (txtVerify.InvokeRequired)
             {
-                SendMessageCallback d = new SendMessageCallback(SendMessage);
-                this.Invoke(d, new object[] { payload });
+                var d = new SendMessageCallback(SendMessage);
+                Invoke(d, new object[] { payload });
             }
             else
             {
@@ -154,31 +157,30 @@ namespace FingerCapturing
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnBack_Click(System.Object sender, System.EventArgs e)
-        {
-            this.Close();
-        }
+        private void BtnBack_Click (object sender, EventArgs e) => Close();
 
         /// <summary>
         /// Start a verification thread.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Verification_Load(object sender, System.EventArgs e)
+        private void Verification_Load (object sender, System.EventArgs e)
         {
             reset = false;
 
-            verifyThreadHandle = new Thread(VerifyThread);
-            verifyThreadHandle.IsBackground = true;
+            verifyThreadHandle = new Thread(VerifyThread)
+            {
+                IsBackground = true
+            };
             verifyThreadHandle.Start();
         }
 
-        private void Verification_Closed(object sender, System.EventArgs e)
+        private void Verification_Closed (object sender, System.EventArgs e)
         {
-            if (currentinstance.CurrentReader != null)
+            if (Currentinstance.CurrentReader != null)
             {
                 reset = true;
-                currentinstance.CurrentReader.CancelCapture();
+                Currentinstance.CurrentReader.CancelCapture();
 
                 if (verifyThreadHandle != null)
                 {

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Staaworks.BankExpert.WinForms
 {
-    public class QuestionAndAnswerViewDataHolder : IViewDataHolder
+    class QuestionAndAnswerViewDataHolder : IViewDataHolder
     {
         public Control ViewDataControl
         {
