@@ -73,24 +73,24 @@ namespace AForge.Fuzzy
         public float Defuzzify( FuzzyOutput fuzzyOutput, INorm normOperator )
         {
             // results and accumulators
-            float weightSum = 0, membershipSum = 0;
+            float weightSum = 0f, membershipSum = 0f;
 
             // speech universe
-            float start = fuzzyOutput.OutputVariable.Start;
-            float end = fuzzyOutput.OutputVariable.End;
+            var start = fuzzyOutput.OutputVariable.Start;
+            var end = fuzzyOutput.OutputVariable.End;
 
             // increment
-            float increment = ( end - start ) / this.intervals;
+            var increment = ( end - start ) / intervals;
 
             // running through the speech universe and evaluating the labels at each point
-            for ( float x = start; x < end; x += increment )
+            for ( var x = start; x < end; x += increment )
             {
                 // we must evaluate x membership to each one of the output labels
-                foreach ( FuzzyOutput.OutputConstraint oc in fuzzyOutput.OutputList )
+                foreach (var oc in fuzzyOutput.OutputList )
                 {
                     // getting the membership for X and constraining it with the firing strength
-                    float membership = fuzzyOutput.OutputVariable.GetLabelMembership( oc.Label, x );
-                    float constrainedMembership = normOperator.Evaluate( membership, oc.FiringStrength );
+                    var membership = fuzzyOutput.OutputVariable.GetLabelMembership( oc.Label, x );
+                    var constrainedMembership = normOperator.Evaluate( membership, oc.FiringStrength );
 
                     weightSum += x * constrainedMembership;
                     membershipSum += constrainedMembership;
@@ -99,7 +99,9 @@ namespace AForge.Fuzzy
 
             // if no membership was found, then the membershipSum is zero and the numerical output is unknown.
             if ( membershipSum == 0 )
+            {
                 throw new Exception( "The numerical output in unavaliable. All memberships are zero." );
+            }
 
             return weightSum / membershipSum;
         }

@@ -24,11 +24,11 @@ namespace AForge.Fuzzy
     /// FuzzySet fsCool = new FuzzySet( "Cool", function1 );
     /// 
     /// // getting membership
-    /// float m1 = fsCool.GetMembership( 15 );
+    /// var m1 = fsCool.GetMembership( 15 );
     /// 
     /// // computing the membership of "NOT Cool"
     /// NotOperator NOT = new NotOperator( );
-    /// float result = NOT.Evaluate( m1 );
+    /// var result = NOT.Evaluate( m1 );
     ///              
     /// // show result
     /// Console.WriteLine( result );

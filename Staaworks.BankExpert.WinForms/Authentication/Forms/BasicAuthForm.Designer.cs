@@ -55,7 +55,7 @@
             this.EmailLabel.Padding = new System.Windows.Forms.Padding(3);
             this.EmailLabel.Size = new System.Drawing.Size(150, 30);
             this.EmailLabel.TabIndex = 9;
-            this.EmailLabel.Text = "Email";
+            this.EmailLabel.Text = "User ID";
             this.EmailLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // SignInButton
@@ -101,7 +101,9 @@
             this.Controls.Add(this.EmailTextBox);
             this.Controls.Add(this.PasswordLabel);
             this.Controls.Add(this.EmailLabel);
+            this.MaximizeBox = false;
             this.Name = "BasicAuthForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "BasicAuthForm";
             this.ResumeLayout(false);
             this.PerformLayout();

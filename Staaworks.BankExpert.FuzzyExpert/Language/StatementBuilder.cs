@@ -109,7 +109,7 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language
         private static VariableDeclaration.ValueType ParseVariableValue(string raw, int lineNumber = -1)
         {
             float min = float.NaN, max = float.NaN;
-            List<string> fuzzySetNames = new List<string>();
+            var fuzzySetNames = new List<string>();
 
             var tokens = raw.Split(',').Select(v => v.Trim());
 
@@ -118,7 +118,7 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language
                 if (token.StartsWith("min:"))
                 {
                     var minString = token.Substring(4).Trim();
-                    bool minTaken = float.TryParse(minString, out min);
+                    var minTaken = float.TryParse(minString, out min);
 
                     if (!minTaken)
                     {
@@ -128,7 +128,7 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language
                 else if (token.StartsWith("max:"))
                 {
                     var maxString = token.Substring(4).Trim();
-                    bool maxTaken = float.TryParse(maxString, out max);
+                    var maxTaken = float.TryParse(maxString, out max);
 
                     if (!maxTaken)
                     {
@@ -182,9 +182,9 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language
             }
 
             var tokens = raw.Substring(1, raw.Length - 2).Split(';').Select(val => val.Trim());
-            Dictionary<string, string> values = new Dictionary<string, string>();
+            var values = new Dictionary<string, string>();
 
-            int index = 0;
+            var index = 0;
             foreach (var token in tokens)
             {
                 if (token.StartsWith("edge:"))
@@ -242,7 +242,7 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language
 
             var stack = new Stack<string>();
 
-            int index = 0;
+            var index = 0;
 
             var node = nodes.First;
             var type = node.Value.ToLower(); // Must be one of LV, FS, RULE
@@ -294,7 +294,7 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language
             var dic = new Dictionary<string, object>();
             var codeStack = new Stack<Token>();
 
-            int bracketsLevel = 0;
+            var bracketsLevel = 0;
             bool newListElement = false;
             bool freeTextStarted = false;
             Token currentRootToken = null;
@@ -645,6 +645,7 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language
             {
                 Dic = new Dictionary<string, Token>();
             }
+
             private int index = 0;
             private Dictionary<string, Token> Dic { get; set; }
 
@@ -667,9 +668,7 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language
 
 
             public bool HasKey(int key)
-            {
-                return key >= 0 && key <= index;
-            }
+                => key >= 0 && key <= index;
 
             public bool HasKey (string key) => Dic.ContainsKey (key);
             public IEnumerable<KeyValuePair<string, Token>> TokenPairs => Dic;

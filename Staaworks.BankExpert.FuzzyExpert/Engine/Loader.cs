@@ -76,7 +76,7 @@ namespace Staaworks.BankExpert.FuzzyExpert.Engine
             foreach (var fset in declarations.fsets)
             {
                 TrapezoidalFunction membership;
-                float max = 1.0f, min = 0.0f;
+                float max = 1, min = 0;
                 var map = fset.RealValue;
                 if (map.ContainsKey("max"))
                 {

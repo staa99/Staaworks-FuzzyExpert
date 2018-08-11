@@ -120,10 +120,10 @@ namespace FingerCapturing
 
         private void SendMessage(string payload)
         {
-            if (this.txtEnroll.InvokeRequired)
+            if (txtEnroll.InvokeRequired)
             {
-                SendMessageCallback d = new SendMessageCallback(SendMessage);
-                this.Invoke(d, new object[] { payload });
+                var d = new SendMessageCallback(SendMessage);
+                Invoke(d, new object[] { payload });
             }
             else
             {
@@ -138,17 +138,14 @@ namespace FingerCapturing
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnBack_Click(System.Object sender, System.EventArgs e)
-        {
-            this.Close();
-        }
+        private void BtnBack_Click (object sender, EventArgs e) => Close();
 
         /// <summary>
         /// Start an enrollment thread.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Enrollment_Load(object sender, System.EventArgs e)
+        private void Enrollment_Load(object sender, EventArgs e)
         {
             reset = false;
 
@@ -157,7 +154,7 @@ namespace FingerCapturing
             enrollThreadHandle.Start();
         }
 
-        private void Enrollment_Closed(object sender, System.EventArgs e)
+        private void Enrollment_Closed(object sender, EventArgs e)
         {
             if (_sender.CurrentReader != null)
             {

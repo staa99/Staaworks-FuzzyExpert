@@ -288,7 +288,7 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language.DeclarationFactories
             }
             catch (Exception ex)
             {
-                var message = String.Format("Error occurred while creating the variable with id: {0}", identifier);
+                var message = string.Format("Error occurred while creating the variable with id: {0}", identifier);
                 throw new InvalidOperationException(message, ex);
             }
         }
@@ -343,7 +343,7 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language.DeclarationFactories
 
                 var result = new Dictionary<string, string>();
 
-                for (int i = 0; i < unnamedEntries.Length; i++)
+                for (var i = 0; i < unnamedEntries.Length; i++)
                 {
                     result[i.ToString()] = unnamedEntries[i];
                 }

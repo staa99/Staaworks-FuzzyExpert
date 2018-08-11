@@ -1,4 +1,5 @@
 ﻿using Staaworks.BankExpert.Core.Repositories;
+using Staaworks.BankExpert.Shared.Cache;
 using Staaworks.BankExpert.Shared.Models;
 using Staaworks.BankExpert.WinForms.Interfaces;
 using System.Collections.Generic;
@@ -55,6 +56,10 @@ namespace Staaworks.BankExpert.WinForms
             if (Questions.Any (p => p.Value == null && p.Key.Source == "user"))
             {
                 QuestionView.SetCurrentQuestion (Questions.First (p => p.Value == null && p.Key.Source == "user").Key, Questions.Count (p => p.Value == null) <= 1);
+            }
+            else
+            {
+                Reciever.SetQuestionValue(null, null);
             }
         }
     }

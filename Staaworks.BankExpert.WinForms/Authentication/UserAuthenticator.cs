@@ -20,7 +20,7 @@ namespace Staaworks.BankExpert.WinForms.Authentication
     {
         public AuthenticationData[] AuthenticationData { get; set; }
         private Dictionary<UserAuthenticationScheme, Action> SchemeMap { get; }
-        private User User { get; set; }
+        public User User { get; set; }
         public Control ViewDataControl { get; set; }
         public IDataReciever Reciever { get; set; }
         public Action<bool> OnComplete { get; set; }
@@ -107,6 +107,9 @@ namespace Staaworks.BankExpert.WinForms.Authentication
 
             if (UserExists)
             {
+                //uncomment to bypass fingerprint in the absence of scanner
+                //AuthenticationData.Single(d => d.Scheme == FingerprintAuthentication).Authenticated = true;
+                //return;
                 if (verificationForm == null)
                 {
                     verificationForm = new Verification

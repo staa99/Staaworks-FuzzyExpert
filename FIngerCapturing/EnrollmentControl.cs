@@ -193,7 +193,7 @@ namespace FingerCapturing
         {
             byte[] rgbBytes = new byte[bytes.Length * 3];
 
-            for (int i = 0; i <= bytes.Length - 1; i++)
+            for (var i = 0; i <= bytes.Length - 1; i++)
             {
                 rgbBytes[(i * 3)] = bytes[i];
                 rgbBytes[(i * 3) + 1] = bytes[i];
@@ -203,7 +203,7 @@ namespace FingerCapturing
 
             BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
 
-            for (int i = 0; i <= bmp.Height - 1; i++)
+            for (var i = 0; i <= bmp.Height - 1; i++)
             {
                 IntPtr p = new IntPtr(data.Scan0.ToInt32() + data.Stride * i);
                 System.Runtime.InteropServices.Marshal.Copy(rgbBytes, i * bmp.Width * 3, p, bmp.Width * 3);

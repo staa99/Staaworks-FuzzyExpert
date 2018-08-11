@@ -38,7 +38,6 @@ namespace Staaworks.BankExpert.Data.Models
             userModelBuilder.Property(u => u.Phone).HasMaxLength(50).IsOptional();
             userModelBuilder.Property(u => u.ZipOrPostalAddress).HasMaxLength(50).IsOptional();
             userModelBuilder.HasMany(u => u.Snapshots).WithRequired(s => s.Owner);
-            userModelBuilder.HasMany(u => u.FingerprintLogs).WithRequired(s => s.Owner);
             userModelBuilder.HasMany(u => u.SnapshotsCreated).WithRequired(s => s.CreatedBy).WillCascadeOnDelete(false);
             userModelBuilder.HasMany(u => u.SnapshotsEdited).WithOptional(s => s.LastModifiedBy).WillCascadeOnDelete(false);
 

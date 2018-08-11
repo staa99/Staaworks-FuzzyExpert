@@ -86,7 +86,7 @@ namespace AForge.Fuzzy
         {
             Rule[] r = new Rule[rules.Count];
 
-            int i = 0;
+            var i = 0;
             foreach ( KeyValuePair<string, Rule> kvp in rules )
                 r[i++] = kvp.Value;
 

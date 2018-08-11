@@ -27,7 +27,7 @@ namespace AForge.Fuzzy
     /// // creating the instance
     /// SingletonFunction membershipFunction = new SingletonFunction( 10 );
     /// // getting membership for several points
-    /// for ( int i = 0; i &lt; 20; i++ )
+    /// for ( var i = 0; i &lt; 20; i++ )
     ///     Console.WriteLine( membershipFunction.GetMembership( i ) );
     /// </code>
     /// </remarks>

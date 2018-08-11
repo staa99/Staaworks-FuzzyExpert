@@ -40,7 +40,16 @@ namespace Staaworks.BankExpert.Core.Repositories
 
 
             var outputVariableName = Loader.CurrentContext.Output.Name;
-            var result = system.Evaluate(outputVariableName);
+            float result;
+            try
+            {
+                result = system.Evaluate(outputVariableName);
+            }
+            catch
+            {
+                return ("Don't know what to do with your case. Please meet someone in the bank", null);
+            }
+
             OutputDefinition chosenDefinition = null;
 
             if (Loader.CurrentContext.Output.Type == DefinitionType.constant)
@@ -49,14 +58,14 @@ namespace Staaworks.BankExpert.Core.Repositories
             }
             else
             {
-                var definitions = new LinkedList<OutputDefinition>(Loader.CurrentContext.Output.Definitions);
+                var definitions = new LinkedList<OutputDefinition>(Loader.CurrentContext.Output.Definitions.OrderBy(d => d.Value));
 
                 var definition = definitions.First;
-            
-
-                while (definition != null && definition.Next != null)
+                
+                while (definition != null)
                 {
-                    if (definition.Value.Value <= result && result <= definition.Next.Value.Value)
+                    //if ((definition.Next == null && result >= definition.Value.Value) || (result >= definition.Value.Value && definition.Next.Value.Value >= result))
+                    if (definition.Value.Value >= result)
                     {
                         chosenDefinition = definition.Value;
                         break;
@@ -65,8 +74,14 @@ namespace Staaworks.BankExpert.Core.Repositories
                 }
             }
 
-            if (chosenDefinition.IsContext) return (null, LoadContext(chosenDefinition.Text));
-            else return (chosenDefinition.Text, null);
+            if (chosenDefinition.IsContext)
+            {
+                return (null, LoadContext(chosenDefinition.Text));
+            }
+            else
+            {
+                return (chosenDefinition.Text, null);
+            }
         }
     }
 }

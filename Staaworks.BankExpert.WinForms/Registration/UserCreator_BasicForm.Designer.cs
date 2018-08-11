@@ -148,7 +148,7 @@
             this.label7.Padding = new System.Windows.Forms.Padding(3);
             this.label7.Size = new System.Drawing.Size(150, 30);
             this.label7.TabIndex = 0;
-            this.label7.Text = "Email";
+            this.label7.Text = "User ID";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // NameTextBox

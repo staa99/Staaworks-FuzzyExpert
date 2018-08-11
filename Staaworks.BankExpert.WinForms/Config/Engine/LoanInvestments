@@ -1,0 +1,94 @@
+﻿// amount of money
+{
+	set Low = [0, 50000, edge: right]
+}
+
+{
+	set Mid = [49999, 50000, 99999, 100000]
+}
+
+{
+	set High = [99999, 100000, 149999, 150000]
+}
+
+{
+	set VeryHigh = [149999, 200000, edge: left]
+}
+
+
+{
+	set TreasuryBills = [0, 0.0000000001, 2.9999999999, 3]
+}
+
+{
+	set FixedDeposit = [3, 3.0000000001, 5.9999999999, 6]
+}
+
+{
+	set ConsumerLoan = [6, 6.0000000001, 8.9999999999, 9]
+}
+
+
+
+
+
+
+{
+	var FinancialStrength =	min: 0;
+							max: 200000;
+							labels: [Low, Mid, High, VeryHigh];
+							source: finStrength;
+}
+
+{
+	var Retention =	min: 0;
+					max: 200000;
+					labels: [Low, Mid, High, VeryHigh];
+					source: retention;
+}
+
+
+{
+	var Lodgement =	min: 0;
+					max: 200000;
+					labels: [Low, Mid, High, VeryHigh];
+					source: lodgement;
+}
+
+
+{
+	var Suggestion =		min: 0;
+							max: 12;
+							//note that the value of the output definitions corresponds with the order of the label definition
+							// the value has to be the right limit
+							labels: [TreasuryBills, FixedDeposit, ConsumerLoan];
+							definitionsType: overflow;
+							outputDefinitions: [
+								d2: [text: "You should invest in fixed deposit", value: 6, isContext: false],
+								d1: [text: "You should invest in treasury bills", value: 3, isContext: false],
+								d3: [text: "ConsumerLoan", value: 9, isContext: true]
+							]
+}
+
+
+// 
+
+{
+	rule R1 =		clause: "IF FinancialStrength IS High THEN Suggestion IS FixedDeposit";
+}
+
+{
+	rule R4 =		clause: "IF FinancialStrength IS High AND (Retention IS Low OR Retention IS Mid OR Retention IS High) THEN Suggestion IS FixedDeposit";
+}
+
+{
+	rule R5 =		clause: "IF FinancialStrength IS High AND (Lodgement IS Low OR Lodgement IS Mid OR Lodgement IS High) THEN Suggestion IS FixedDeposit";
+}
+
+{
+	rule R2 =		clause: "IF Retention IS VeryHigh AND FinancialStrength IS VeryHigh THEN Suggestion IS TreasuryBills";
+}
+
+{
+	rule R3	=		clause: "IF (FinancialStrength IS Low OR FinancialStrength IS Mid) AND Retention IS Low AND (Lodgement IS High OR Lodgement IS VeryHigh) THEN Suggestion IS ConsumerLoan"
+}

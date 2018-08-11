@@ -79,6 +79,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxFrameGrabber)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.MaximizeBox = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 
         }
 

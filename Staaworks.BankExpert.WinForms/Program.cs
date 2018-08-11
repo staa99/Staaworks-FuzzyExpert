@@ -22,10 +22,7 @@ namespace Staaworks.BankExpert.WinForms
         {
             LoadAssemblies();
 
-            SystemGeneratedSourceCache.Data = new Dictionary<string, object>
-            {
-                ["user.balanceAfter"] = 300000
-            };
+            SystemGeneratedSourceCache.Data = new Dictionary<string, object>();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainWindow());

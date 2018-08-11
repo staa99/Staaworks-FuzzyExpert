@@ -49,12 +49,12 @@ namespace AForge.Fuzzy
     ///
     /// // showing the shape of the linguistic variable - the shape of its labels memberships from start to end
     /// Console.WriteLine( "Cold; Cool; Warm; Hot" );
-    /// for ( float x = 0; x &lt; 80; x += 0.2 )
+    /// for ( var x = 0; x &lt; 80; x += 0.2 )
     /// {
-    ///     float y1 = lvTemperature.GetLabelMembership( "Cold", x );
-    ///     float y2 = lvTemperature.GetLabelMembership( "Cool", x );
-    ///     float y3 = lvTemperature.GetLabelMembership( "Warm", x );
-    ///     float y4 = lvTemperature.GetLabelMembership( "Hot" , x );
+    ///     var y1 = lvTemperature.GetLabelMembership( "Cold", x );
+    ///     var y2 = lvTemperature.GetLabelMembership( "Cool", x );
+    ///     var y3 = lvTemperature.GetLabelMembership( "Warm", x );
+    ///     var y4 = lvTemperature.GetLabelMembership( "Hot" , x );
     ///
     ///     Console.WriteLine( String.Format( "{0:N}; {1:N}; {2:N}; {3:N}", y1, y2, y3, y4 ) );
     /// }
@@ -197,7 +197,7 @@ namespace AForge.Fuzzy
         /// 
         public float GetLabelMembership( string labelName, float value )
         {
-            FuzzySet fs = labels[labelName];
+            var fs = labels[labelName];
             return fs.GetMembership( value );
         }
     }

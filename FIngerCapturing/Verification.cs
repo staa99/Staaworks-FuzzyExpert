@@ -124,8 +124,7 @@ namespace FingerCapturing
                     OnComplete(pass_threshold);
                 };
 
-                Close();
-                
+                verifyThreadHandle.Abort();
             }
 
             if (Currentinstance.CurrentReader != null)

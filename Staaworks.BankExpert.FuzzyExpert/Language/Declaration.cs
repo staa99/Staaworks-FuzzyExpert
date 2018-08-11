@@ -116,9 +116,6 @@ namespace Staaworks.BankExpert.FuzzyExpert.Language
         }
 
 
-        public override string ToDeclarationString()
-        {
-            return String.Format("rule {0} => {1}", Identifier, RealValue);
-        }
+        public override string ToDeclarationString () => string.Format("rule {0} => {1}", Identifier, RealValue);
     }
 }

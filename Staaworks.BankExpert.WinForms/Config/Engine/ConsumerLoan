@@ -1,0 +1,93 @@
+﻿// required input: creditReport, monthlyRepayment, userBlacklisted
+
+
+{
+	set False = [0, 0.00001, 0.49999, 0.5]
+}
+
+{
+	set True = [0.5, 0.50001, 0.99999, 1]
+}
+
+{
+	set Bad = [0, 3, edge: right]
+}
+
+{
+	set Fair = [2.99999, 3, 5.99999, 6]
+}
+
+{
+	set Good = [5.99999, 9, edge: left]
+}
+
+{
+	set Approved = [0, 1, edge: right]
+}
+
+{
+	set PayOutstanding = [0.99999, 1, 1.99999, 2]
+}
+
+{
+	set ReduceAmount = [1.99999, 2, 2.99999, 3]
+}
+
+{
+	set Disapproved = [2.99999, 3, 3.99999, 4]
+}
+
+
+
+
+{
+	var CreditReport =	min: 0;
+						max: 9;
+						labels: [Bad, Fair, Good];
+						source: creditReport;
+}
+
+{
+	var MonthlyRepaymentValid =	min: 0;
+								max: 1;
+								labels: [False, True];
+								source: monthlyRepayment;
+}
+
+{
+	var UserBlacklisted =	min: 0;
+							max: 1;
+							labels: [True, False];
+							source: userBlacklisted;
+}
+
+
+{
+	var RequestResult = min: 0;
+						max: 4;
+						labels: [Approved, ReduceAmount, PayOutstanding, Disapproved];
+						definitionsType: overflow;
+						outputDefinitions: [
+							d2: [text: "You are eligible for a loan", value: 1, isContext: false],
+							d1: [text: "Cannot give a loan until you pay outstanding", value: 2, isContext: false],
+							d4: [text: "You cannot take a loan", value: 4, isContext: false],
+							d3: [text: "You cannot loan now because you don't seem to be able to pay the monthly installments. You can try reducing the amount", value: 3, isContext: false]
+						]
+}
+
+
+{
+	rule R1	=		clause: "IF CreditReport IS Good AND MonthlyRepaymentValid IS True AND UserBlacklisted IS False THEN RequestResult IS Approved";
+}
+
+{
+	rule R2 =		clause: "IF UserBlacklisted IS False AND CreditReport IS Good AND MonthlyRepaymentValid IS False THEN RequestResult IS ReduceAmount";
+}
+
+{
+	rule R3 =		clause: "IF CreditReport IS Fair AND UserBlacklisted IS False THEN RequestResult IS PayOutstanding"
+}
+
+{
+	rule R4 =		clause: "IF CreditReport IS Bad OR UserBlacklisted IS True THEN RequestResult IS Disapproved"
+}

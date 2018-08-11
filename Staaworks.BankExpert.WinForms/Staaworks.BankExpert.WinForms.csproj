@@ -45,6 +45,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -62,6 +65,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\AuthenticationData.cs" />
+    <Compile Include="Authentication\AuthSchemeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Authentication\AuthSchemeDialog.Designer.cs">
+      <DependentUpon>AuthSchemeDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Authentication\Forms\BasicAuthForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +102,12 @@
     <Compile Include="QuestionAndAnswer\QuestionView.Designer.cs">
       <DependentUpon>QuestionView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Registration\FinancialDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registration\FinancialDataForm.Designer.cs">
+      <DependentUpon>FinancialDataForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Registration\UserCreatorData.cs" />
     <Compile Include="Registration\UserCreatorFaceData.cs" />
     <Compile Include="Registration\UserCreatorFingerprintData.cs" />
@@ -102,6 +117,22 @@
     <Compile Include="Registration\UserCreator_BasicForm.Designer.cs">
       <DependentUpon>UserCreator_BasicForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Workflows\FinPositionDisplayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Workflows\FinPositionDisplayForm.Designer.cs">
+      <DependentUpon>FinPositionDisplayForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Workflows\LoanInvestments.cs" />
+    <Compile Include="Workflows\ShowAvailableOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Workflows\ShowAvailableOptions.Designer.cs">
+      <DependentUpon>ShowAvailableOptions.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Authentication\AuthSchemeDialog.resx">
+      <DependentUpon>AuthSchemeDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Authentication\Forms\BasicAuthForm.resx">
       <DependentUpon>BasicAuthForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -124,12 +155,22 @@
     <EmbeddedResource Include="QuestionAndAnswer\QuestionView.resx">
       <DependentUpon>QuestionView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Registration\FinancialDataForm.resx">
+      <DependentUpon>FinancialDataForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Registration\UserCreator_BasicForm.resx">
       <DependentUpon>UserCreator_BasicForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Workflows\FinPositionDisplayForm.resx">
+      <DependentUpon>FinPositionDisplayForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Workflows\ShowAvailableOptions.resx">
+      <DependentUpon>ShowAvailableOptions.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Config\Engine\RootContext" />
     <None Include="Config\Engine\StopOrStraight" />
     <None Include="Config\Engine\TestDateDifferenceKnowledge" />
+    <None Include="Config\Input\LoanInvestment\input.json" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Staaworks.BankExpert.Shared.Models.Question.datasource" />
     <None Include="Properties\Settings.settings">
@@ -165,6 +206,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Config\Engine\LoanInvestments" />
+    <None Include="Config\Engine\ConsumerLoan" />
     <Content Include="Config\Face\TrainedFaces\face1.bmp" />
     <Content Include="Config\Face\TrainedFaces\face2.bmp" />
     <Content Include="Config\Face\TrainedLabels.txt" />

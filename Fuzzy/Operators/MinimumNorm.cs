@@ -27,12 +27,12 @@ namespace AForge.Fuzzy
     /// FuzzySet fsNear = new FuzzySet( "Near", function2 );
     /// 
     /// // getting memberships
-    /// float m1 = fsCool.GetMembership( 15 );
-    /// float m2 = fsNear.GetMembership( 35 );
+    /// var m1 = fsCool.GetMembership( 15 );
+    /// var m2 = fsNear.GetMembership( 35 );
     /// 
     /// // computing the membership of "Cool AND Near"
     /// MinimumNorm AND = new MinimumNorm( );
-    /// float result = AND.Evaluate( m1, m2 );
+    /// var result = AND.Evaluate( m1, m2 );
     ///              
     /// // show result
     /// Console.WriteLine( result );

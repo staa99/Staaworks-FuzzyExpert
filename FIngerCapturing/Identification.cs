@@ -45,7 +45,7 @@ namespace FingerCapturing
 
             SendMessage("Place your right index finger on the reader.");
 
-            int count = 0;
+            var count = 0;
             while (!reset)
             {
                 Fid fid = null;

@@ -30,6 +30,7 @@ namespace Staaworks.BankExpert.Shared.Types
                 array[index] = el;
             }
             Length++;
+            if (Length > _maxLength) Length = _maxLength;
         }
 
 

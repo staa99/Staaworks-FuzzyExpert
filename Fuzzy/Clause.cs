@@ -51,7 +51,7 @@ namespace AForge.Fuzzy
     /// Clause fuzzyClause = new Clause( lvTemperature, fsHot );
     /// // setting the numerical input of the variable to evaluate the Clause
     /// lvTemperature.NumericInput = 35;
-    /// float result = fuzzyClause.Evaluate( );
+    /// var result = fuzzyClause.Evaluate( );
     /// Console.WriteLine ( result.ToString( ) );
     /// </code>    
     /// </remarks>

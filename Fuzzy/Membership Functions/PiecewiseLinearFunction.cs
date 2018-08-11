@@ -40,7 +40,7 @@ namespace AForge.Fuzzy
     /// // creating the instance
     /// PiecewiseLinearFunction membershipFunction = new PiecewiseLinearFunction( points );
     /// // getting membership for several points
-    /// for ( int i = 5; i &lt; 45; i++ )
+    /// for ( var i = 5; i &lt; 45; i++ )
     ///     Console.WriteLine( membershipFunction.GetMembership( i ) );
     /// </code>
     /// </remarks>
@@ -136,11 +136,15 @@ namespace AForge.Fuzzy
         {
             // no values belong to the fuzzy set, if there are no points in the piecewise function
             if ( points.Length == 0 )
+            {
                 return 0.0f;
+            }
 
             // if X value is less than the first point, so first point's Y will be returned as membership
             if ( x < points[0].X )
+            {
                 return points[0].Y;
+            }
 
             // looking for the line that contais the X value
             for ( int i = 1, n = points.Length; i < n; i++ )
@@ -149,12 +153,12 @@ namespace AForge.Fuzzy
                 if ( x < points[i].X )
                 {
                     // points to calculate line's equation
-                    float y1 = points[i].Y;
-                    float y0 = points[i - 1].Y;
-                    float x1 = points[i].X;
-                    float x0 = points[i - 1].X;
+                    var y1 = points[i].Y;
+                    var y0 = points[i - 1].Y;
+                    var x1 = points[i].X;
+                    var x0 = points[i - 1].X;
                     // angular coefficient
-                    float m = ( y1 - y0 ) / ( x1 - x0 );
+                    var m = ( y1 - y0 ) / ( x1 - x0 );
                     // returning the membership - the Y value for this X
                     return m * ( x - x0 ) + y0;
                 }

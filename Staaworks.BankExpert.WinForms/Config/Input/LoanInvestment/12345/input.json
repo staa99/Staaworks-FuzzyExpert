@@ -1,0 +1,8 @@
+{
+  "creditReport": "1",
+  "monthlyRepayment": "0.85",
+  "userBlacklisted": "0.1",
+  "finStrength": "120",
+  "retention": "2500",
+  "lodgement": "120000"
+}

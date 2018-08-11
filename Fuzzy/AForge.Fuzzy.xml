@@ -45,7 +45,7 @@
              Clause fuzzyClause = new Clause( lvTemperature, fsHot );
              // setting the numerical input of the variable to evaluate the Clause
              lvTemperature.NumericInput = 35;
-             float result = fuzzyClause.Evaluate( );
+             var result = fuzzyClause.Evaluate( );
              Console.WriteLine ( result.ToString( ) );
              </code>    
              </remarks>
@@ -395,7 +395,7 @@
             // getting outputs
             try
             {
-                float newAngle = IS.Evaluate( "Angle" );
+                var newAngle = IS.Evaluate( "Angle" );
             }
             catch ( Exception )
             {
@@ -519,7 +519,7 @@
             // creating the instance
             SingletonFunction membershipFunction = new SingletonFunction( 10 );
             // getting membership for several points
-            for ( int i = 0; i &lt; 20; i++ )
+            for ( var i = 0; i &lt; 20; i++ )
                 Console.WriteLine( membershipFunction.GetMembership( i ) );
             </code>
             </remarks>
@@ -574,11 +574,11 @@
             FuzzySet fsCool = new FuzzySet( "Cool", function1 );
             
             // getting membership
-            float m1 = fsCool.GetMembership( 15 );
+            var m1 = fsCool.GetMembership( 15 );
             
             // computing the membership of "NOT Cool"
             NotOperator NOT = new NotOperator( );
-            float result = NOT.Evaluate( m1 );
+            var result = NOT.Evaluate( m1 );
                          
             // show result
             Console.WriteLine( result );
@@ -727,12 +727,12 @@
             FuzzySet fsNear = new FuzzySet( "Near", function2 );
             
             // getting memberships
-            float m1 = fsCool.GetMembership( 15 );
-            float m2 = fsNear.GetMembership( 35 );
+            var m1 = fsCool.GetMembership( 15 );
+            var m2 = fsNear.GetMembership( 35 );
             
             // computing the membership of "Cool OR Near"
             MaximumCoNorm OR = new MaximumCoNorm( );
-            float result = OR.Evaluate( m1, m2 );
+            var result = OR.Evaluate( m1, m2 );
                          
             // show result
             Console.WriteLine( result );
@@ -844,7 +844,7 @@
              // testing the firing strength
              lvSteel.NumericInput = 12;
              lvStove.NumericInput = 35;
-             float result = r1.EvaluateFiringStrength( );
+             var result = r1.EvaluateFiringStrength( );
              Console.WriteLine( result.ToString( ) );
              </code>    
              </remarks>
@@ -982,12 +982,12 @@
             
              // showing the shape of the linguistic variable - the shape of its labels memberships from start to end
              Console.WriteLine( "Cold; Cool; Warm; Hot" );
-             for ( float x = 0; x &lt; 80; x += 0.2 )
+             for ( var x = 0; x &lt; 80; x += 0.2 )
              {
-                 float y1 = lvTemperature.GetLabelMembership( "Cold", x );
-                 float y2 = lvTemperature.GetLabelMembership( "Cool", x );
-                 float y3 = lvTemperature.GetLabelMembership( "Warm", x );
-                 float y4 = lvTemperature.GetLabelMembership( "Hot" , x );
+                 var y1 = lvTemperature.GetLabelMembership( "Cold", x );
+                 var y2 = lvTemperature.GetLabelMembership( "Cool", x );
+                 var y3 = lvTemperature.GetLabelMembership( "Warm", x );
+                 var y4 = lvTemperature.GetLabelMembership( "Hot" , x );
             
                  Console.WriteLine( String.Format( "{0:N}; {1:N}; {2:N}; {3:N}", y1, y2, y3, y4 ) );
              }
@@ -1105,12 +1105,12 @@
             
             // show membership to the Cool set for some values 
             Console.WriteLine( "COOL" );
-            for ( int i = 13; i &lt;= 28; i++ )
+            for ( var i = 13; i &lt;= 28; i++ )
                 Console.WriteLine( fsCool.GetMembership( i ) );
             
             // show membership to the Warm set for some values 
             Console.WriteLine( "WARM" );
-            for ( int i = 23; i &lt;= 38; i++ )
+            for ( var i = 23; i &lt;= 38; i++ )
                 Console.WriteLine( fsWarm.GetMembership( i ) );
             </code>    
             </remarks>
@@ -1214,7 +1214,7 @@
             // creating the instance
             PiecewiseLinearFunction membershipFunction = new PiecewiseLinearFunction( points );
             // getting membership for several points
-            for ( int i = 5; i &lt; 45; i++ )
+            for ( var i = 5; i &lt; 45; i++ )
                 Console.WriteLine( membershipFunction.GetMembership( i ) );
             </code>
             </remarks>
@@ -1437,12 +1437,12 @@
             FuzzySet fsNear = new FuzzySet( "Near", function2 );
             
             // getting memberships
-            float m1 = fsCool.GetMembership( 15 );
-            float m2 = fsNear.GetMembership( 35 );
+            var m1 = fsCool.GetMembership( 15 );
+            var m2 = fsNear.GetMembership( 35 );
             
             // computing the membership of "Cool AND Near"
             ProductNorm AND = new ProductNorm( );
-            float result = AND.Evaluate( m1, m2 );
+            var result = AND.Evaluate( m1, m2 );
                          
             // show result
             Console.WriteLine( result );
@@ -1526,12 +1526,12 @@
             FuzzySet fsNear = new FuzzySet( "Near", function2 );
             
             // getting memberships
-            float m1 = fsCool.GetMembership( 15 );
-            float m2 = fsNear.GetMembership( 35 );
+            var m1 = fsCool.GetMembership( 15 );
+            var m2 = fsNear.GetMembership( 35 );
             
             // computing the membership of "Cool AND Near"
             MinimumNorm AND = new MinimumNorm( );
-            float result = AND.Evaluate( m1, m2 );
+            var result = AND.Evaluate( m1, m2 );
                          
             // show result
             Console.WriteLine( result );

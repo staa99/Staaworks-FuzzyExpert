@@ -38,7 +38,7 @@
             this.EmailTextBox.Location = new System.Drawing.Point(195, 32);
             this.EmailTextBox.MinimumSize = new System.Drawing.Size(150, 30);
             this.EmailTextBox.Name = "EmailTextBox";
-            this.EmailTextBox.Size = new System.Drawing.Size(150, 30);
+            this.EmailTextBox.Size = new System.Drawing.Size(150, 20);
             this.EmailTextBox.TabIndex = 12;
             // 
             // EmailLabel
@@ -53,7 +53,7 @@
             this.EmailLabel.Padding = new System.Windows.Forms.Padding(3);
             this.EmailLabel.Size = new System.Drawing.Size(150, 30);
             this.EmailLabel.TabIndex = 11;
-            this.EmailLabel.Text = "Email";
+            this.EmailLabel.Text = "User ID";
             this.EmailLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ContinueAuthButton

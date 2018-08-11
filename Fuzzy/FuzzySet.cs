@@ -37,12 +37,12 @@ namespace AForge.Fuzzy
     /// 
     /// // show membership to the Cool set for some values 
     /// Console.WriteLine( "COOL" );
-    /// for ( int i = 13; i &lt;= 28; i++ )
+    /// for ( var i = 13; i &lt;= 28; i++ )
     ///     Console.WriteLine( fsCool.GetMembership( i ) );
     /// 
     /// // show membership to the Warm set for some values 
     /// Console.WriteLine( "WARM" );
-    /// for ( int i = 23; i &lt;= 38; i++ )
+    /// for ( var i = 23; i &lt;= 38; i++ )
     ///     Console.WriteLine( fsWarm.GetMembership( i ) );
     /// </code>    
     /// </remarks>

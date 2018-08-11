@@ -99,7 +99,7 @@ namespace AForge.Fuzzy
     /// // testing the firing strength
     /// lvSteel.NumericInput = 12;
     /// lvStove.NumericInput = 35;
-    /// float result = r1.EvaluateFiringStrength( );
+    /// var result = r1.EvaluateFiringStrength( );
     /// Console.WriteLine( result.ToString( ) );
     /// </code>    
     /// </remarks>
@@ -279,7 +279,7 @@ namespace AForge.Fuzzy
             LinguisticVariable lingVar = null;
 
             // verifying each token
-            for ( int i = 0; i < tokensList.Length; i++ )
+            for ( var i = 0; i < tokensList.Length; i++ )
             {
                 // removing spaces
                 string token = tokensList[i].Trim( );
@@ -412,7 +412,7 @@ namespace AForge.Fuzzy
             string[] unaryOperatorArray = unaryOperators.Split(';');
 
             // looking for unary operators
-            for ( int i = 0; i < tokens.Length; i++ )
+            for ( var i = 0; i < tokens.Length; i++ )
             {
                 // if its unary and there is an "IS" token before, we must change positions
                 bool isUnaryOperator = false;
@@ -448,7 +448,7 @@ namespace AForge.Fuzzy
         public float EvaluateFiringStrength( )
         {
             // Stack to store the operand values
-            Stack<float> s = new Stack<float>( );
+            var s = new Stack<float>( );
 
             // Logic to calculate the firing strength
             foreach ( object o in rpnTokenList )
@@ -456,19 +456,21 @@ namespace AForge.Fuzzy
                 // if its a clause, then its value must be calculated and pushed
                 if ( o.GetType( ) == typeof( Clause ) )
                 {
-                    Clause c = o as Clause;
+                    var c = o as Clause;
                     s.Push( c.Evaluate( ) );
                 }
                 // if its an operator (AND / OR) the operation is performed and the result 
                 // returns to the stack
                 else
                 {
-                    float y = s.Pop( );
-                    float x = 0;
+                    var y = s.Pop( );
+                    var x = 0f;
 
                     // unary pops only one value
                     if ( unaryOperators.IndexOf( o.ToString( ) ) < 0 )
+                    {
                         x = s.Pop( );
+                    }
 
                     // operation
                     switch ( o.ToString( ) )

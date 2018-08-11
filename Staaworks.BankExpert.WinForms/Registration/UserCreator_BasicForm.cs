@@ -31,6 +31,8 @@ namespace Staaworks.BankExpert.WinForms.Registration
             if (ValidateControls())
             {
                 basicAuthDone = true;
+                UseWaitCursor = true;
+                Cursor = Cursors.WaitCursor;
 
                 if (basicAuthDone && fingerprintRegDone && faceCaptureDone)
                 {
@@ -113,7 +115,10 @@ namespace Staaworks.BankExpert.WinForms.Registration
 
                         if (fingerprintSaved)
                         {
-                            // Registration complete
+                            // Registration complete, display form to enter required input data
+                            var financialDataForm = new FinancialDataForm(CreatorData.User, FinancialDataFormMode.edit);
+                            financialDataForm.ShowDialog();
+                            UseWaitCursor = false;
                             CreatorData.Reciever.LoadTask("QuestionAndAnswer");
                         }
                         else
@@ -143,8 +148,7 @@ namespace Staaworks.BankExpert.WinForms.Registration
                 AddressTextBox.Text == string.Empty ||
                 ZipOrPostalCodeTextBox.Text == string.Empty ||
                 PasswordTextBox.Text == string.Empty ||
-                PasswordTextBox.Text != ConfirmPasswordTextBox.Text ||
-                !Regex.IsMatch(EmailTextBox.Text, "^[\\w.-]+@(?=[a-z\\d][^.]*\\.)[a-z\\d.-]*(?<![.-])$"))
+                PasswordTextBox.Text != ConfirmPasswordTextBox.Text)
             {
                 return false;
             }
@@ -203,30 +207,13 @@ namespace Staaworks.BankExpert.WinForms.Registration
         private void SaveFingerprint () => fingerprintRegDone = true;
 
 
-        public byte[] ImageToByte(Image img)
-        {
-            var converter = new ImageConverter();
-            return (byte[])converter.ConvertTo(img, typeof(byte[]));
-        }
-
-
-        public byte[] ImageToByte2(System.Drawing.Image img)
-        {
-            using (var stream = new MemoryStream())
-            {
-                img.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
-                return stream.ToArray();
-            }
-        }
-
-
         private void EnrollFingerButton_Click (object sender, EventArgs e) => GoToFingerprintEnrollment();
 
 
         private void FaceRegButton_Click (object sender, EventArgs e)
         {
             var email = EmailTextBox.Text;
-            if (string.IsNullOrWhiteSpace(email) || !Regex.IsMatch(email, "^[\\w.-]+@(?=[a-z\\d][^.]*\\.)[a-z\\d.-]*(?<![.-])$"))
+            if (string.IsNullOrWhiteSpace(email))
             {
                 Console.Beep();
                 return;
@@ -248,35 +235,6 @@ namespace Staaworks.BankExpert.WinForms.Registration
             };
 
             CreatorData.FaceData.RecognitionForm.ShowDialog();
-        }
-
-
-        public byte[] BufferFromImage(BitmapImage imageSource)
-        {
-            var stream = imageSource.StreamSource;
-            byte[] buffer = null;
-            if (stream != null && stream.Length > 0)
-            {
-                using (var br = new BinaryReader(stream))
-                {
-                    buffer = br.ReadBytes((int) stream.Length);
-                }
-            }
-
-            return buffer;
-        }
-
-
-        public static byte[] ImageToBytes(BitmapImage img)
-        {
-            using (var ms = new MemoryStream())
-            {
-                var btmMap = new WriteableBitmap(img);
-
-                //  System.Windows.Media.Imaging.Extensions.SaveJpeg(btmMap, ms, img.PixelWidth, img.PixelHeight, 0, 100);
-                img = null;
-                return ms.ToArray();
-            }
         }
     }
 }

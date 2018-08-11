@@ -72,6 +72,10 @@
     <Compile Include="Migrations\201805011205078_Fid_and_fmd_store_changed_to_nvarchar%28max%29.Designer.cs">
       <DependentUpon>201805011205078_Fid_and_fmd_store_changed_to_nvarchar%28max%29.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806022213319_replay-attack-block.cs" />
+    <Compile Include="Migrations\201806022213319_replay-attack-block.Designer.cs">
+      <DependentUpon>201806022213319_replay-attack-block.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -102,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805011205078_Fid_and_fmd_store_changed_to_nvarchar%28max%29.resx">
       <DependentUpon>201805011205078_Fid_and_fmd_store_changed_to_nvarchar%28max%29.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806022213319_replay-attack-block.resx">
+      <DependentUpon>201806022213319_replay-attack-block.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

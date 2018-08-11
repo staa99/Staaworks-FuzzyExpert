@@ -213,6 +213,8 @@ namespace Staaworks.BankExpert.FaceRecognition
                     if (LastNRecognizedLabels.IsFull)
                     {
                         OnComplete();
+                        Dispose(true);
+                        Close();
                     }
                 }
             }

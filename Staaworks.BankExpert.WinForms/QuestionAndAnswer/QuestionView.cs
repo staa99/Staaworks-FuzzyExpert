@@ -43,30 +43,31 @@ namespace Staaworks.BankExpert.WinForms
             valueValid = false;
         }
 
-        private void UpdateQuestionText()
-        {
+        private void UpdateQuestionText () =>
             QuestionTextLabel.Text = CurrentQuestion.UserText;
-        }
 
 
         private void UpdateOptions()
         {
             OptionsContainer.Controls.Clear();
-            Option freetextOption = CurrentQuestion.Options.SingleOrDefault(o => o.Type == OptionType.freetext);
+            var freetextOption = CurrentQuestion.Options?.SingleOrDefault(o => o.Type == OptionType.freetext);
 
-            foreach (var option in CurrentQuestion.Options.Where(o => o.Type != OptionType.freetext))
+            if (CurrentQuestion.Options != null)
             {
-                var radioButton = new RadioButton
+                foreach (var option in CurrentQuestion.Options.Where(o => o.Type != OptionType.freetext))
                 {
-                    Text = option.UserText,
-                    Name = option.Value.ToString(),
-                    AutoSize = true
-                };
+                    var radioButton = new RadioButton
+                    {
+                        Text = option.UserText,
+                        Name = option.Value.ToString(),
+                        AutoSize = true
+                    };
 
 
-                radioButton.CheckedChanged += ValueChanged;
-                optionGroup.Add(radioButton);
-                OptionsContainer.Controls.Add(radioButton);
+                    radioButton.CheckedChanged += ValueChanged;
+                    optionGroup.Add(radioButton);
+                    OptionsContainer.Controls.Add(radioButton);
+                }
             }
 
             if (freetextOption != null)
@@ -120,7 +121,7 @@ namespace Staaworks.BankExpert.WinForms
             else if (sender is TextBox)
             {
                 var textbox = sender as TextBox;
-                if (float.TryParse(textbox.Text, out float value))
+                if (float.TryParse(textbox.Text, out var value))
                 {
                     CurrentValue = CurrentQuestion.Options.Where(o =>
                     {
